@@ -1,0 +1,90 @@
+<!-- our error cc -->
+<div class="cc">
+<ol>
+	<li></li>
+</ol>
+</div>
+<form id="frmEditUser" name="frmEditUser" method="post" action="">
+<p>Nama Sandi ini akan digunakan jika anda ingin mengakses ke Hukumonline.</p><br>
+<table>
+<tbody>
+<tr>
+	<td width=20%><label for="username" class="input required">Nama Pengguna</label></td>
+	<td><input name="username" id="username" type="text" maxlength="50" value="<?=$this->row->username;?>" style="width:340px"><br><span class="example">Contoh:zapatista</span></td>
+</tr>
+<tr>
+	<td>&nbsp;</td>
+	<td><input name="chkavailable1" id="chkavailable1" type="button" value="Cek Nama Penggunaku" onClick='chkavailable(1); return false;'></td>
+</tr>
+<tr class='row1'></tr>
+</tbody>
+</table>
+<input type="hidden" name="guid" id="guid" value="<?=$this->row->guid;?>">
+<p class="buttons"><input value="Ubah" type="submit"></p>
+
+</form>
+<script type="text/javascript">
+var cc = $('div.cc');
+$('#frmEditUser').validate({
+	errorContainer: cc,
+	errorLabelContainer: $("ol", cc),
+	wrapper: 'li',
+	meta: "validate",
+	rules: {
+		username: {
+			required: true,
+			minLength: 2
+		}
+	},
+	messages: {
+		username: {
+			required: "Nama pengguna diwajibkan",
+			minLength: "Nama pengguna paling sedikit 2 karakter"
+		}
+	}
+});
+function chkavailable(id) {
+	var uname = $('#username').attr('value');
+	
+	/* Just to be sure .. remove any changes from previous submit */
+	$('tr.row1').empty();												
+	
+	if (uname != "") {
+		$.ajax({
+			type: 'POST',
+			dataType: 'json',
+			url: '<?=$this->baseUrl;?>/identity/get.me.username',
+			data: 'username='+ uname,
+			success: function(json) {
+				if( json.success == "true" ) {
+					
+					var html = '<td colspan="5" style="color: #7ebddd;margin-bottom: 1.5em; padding-left: 10em; background-repeat: no-repeat; background-position: 0 .2em;">' + json.data + '</td>';
+					$('tr.row' + id).prepend(html);						
+					
+				} else {
+					
+					if (json.error == "1") {
+						var html = '<td colspan="5" style="color: #f00;margin-bottom: 1.5em; padding-left: 7em; background-repeat: no-repeat; background-position: 0 .2em;">' + json.err1 + '</td>';
+					} else if (json.error == "2") {
+						var html = '<td colspan="5" style="color: #f00;margin-bottom: 1.5em; padding-left: 7em; background-repeat: no-repeat; background-position: 0 .2em;">' + json.err2 + '</td>';
+					} else if (json.error == "3") {
+						var html = '<td colspan="5" style="color: #f00;margin-bottom: 1.5em; padding-left: 7em; background-repeat: no-repeat; background-position: 0 .2em;">' + json.err3 + '</td>';
+					}
+					
+					$('tr.row1').prepend(html);						
+					
+				}
+			},
+			failure: function(json) {
+				
+			}
+		});
+	} 
+}
+
+var message = "<?echo $this->message;?>";
+if(message!="")
+{
+	alert (message);
+}
+</script>

@@ -1,0 +1,131 @@
+<? if (isset($this->message)): ?>
+<fieldset>
+    <legend>INFORMATION SAVED</legend>
+    <div class="box box-info closeable">
+        <?= $this->message; ?>
+    </div>
+</fieldset>
+<? endif; ?>
+
+<form id="frmEditProfile" name="frmEditProfile" method="post" action="">
+    <fieldset>
+        <legend>ACCOUNT INFORMATION</legend>
+        <p>
+            <label for="paket">Package:</label><br/>
+            <?=$this->getGroupName($this->row->packageId);?>
+        </p>
+        <p>
+            <label for="fullName" class="required">Full Name:</label><br>
+            <input name="fullName" id="fullName" value="<?=$this->row->fullName ?>" type="text" maxlength="25" style="width:340px">
+        </p>
+        <p>
+            <label for="chkGender">Gender:</label><br>
+            <? if ($this->row->gender == "L") { ?>
+            Pria&nbsp;<input name="chkGender" id="chkGender" value="1" type="radio" checked>
+            Wanita&nbsp;<input name="chkGender" id="chkGender" value="0" type="radio">
+            <? } else  if ($this->row->gender == "P") { ?>
+            Pria&nbsp;<input name="chkGender" id="chkGender" value="1" type="radio">
+            Wanita&nbsp;<input name="chkGender" id="chkGender" value="0" type="radio" checked>
+            <? } else { ?>
+            Pria&nbsp;<input name="chkGender" id="chkGender" value="1" type="radio">
+            Wanita&nbsp;<input name="chkGender" id="chkGender" value="0" type="radio">
+            <? } ?>
+        </p>
+        <? $formater = new Kutu_Lib_Formater(); ?>
+        <p>
+            <?
+                $lang['months'] = array("Januari","Februari","Maret","April","Mei","Juni","Juli","Agustus","September","Oktober","November","Desember");
+                if ($this->row->birthday) {
+                $bdate = $this->row->birthday;
+                $adate = explode('-',$bdate);
+                $year = $adate[0];
+                $month = $adate[1];
+                $day = $adate[2];
+            ?>
+            <label for="birthOfDate" class="required">Birth Of Date:</label><br/>
+            <?=$formater->monthPullDown($month,$lang['months']).$formater->dayPullDown(str_replace(0,'',$day)) ?><input name="year" id="year" type="text" maxlength="4" value="<?=$year;?>" style="width:60px" class="required year">
+            <? } else { ?>
+            <?=$formater->monthPullDown(date("n"),$lang['months']).$formater->dayPullDown(); ?><input name="year" id="year" type="text" maxlength="4" style="width:60px">
+            <? } ?>
+        </p>
+        <p>
+            <label for="education" class="required">Education:</label><br/>
+            <?=$formater->educationPullDown($this->row->educationId) ?>
+        </p>
+        <p>
+            <label for="expense" class="required">Monthly Expenses:</label><br/>
+            <?=$formater->expensePullDown($this->row->expenseId); ?>
+        </p>
+        <p>
+            <label for="company">Company:</label><br/>
+            <input name="company" id="company" value="<?=$this->row->company; ?>" type="text" maxlength="25" style="width:340px">
+        </p>
+        <p>
+            <label for="businessType" class="required">Business Type</label><br/>
+            <?=$formater->businessTypePullDown($this->row->businessTypeId) ?>
+        </p>
+        <p>
+            <label for="phone">Phone:</label><br/>
+            <input name="phone" id="phone" type="text" maxlength="30" value="<?=$this->row->phone ?>" style="width:250px">
+        </p>
+        <p>
+            <label for="fax">Fax:</label><br/>
+            <input name="fax" id="fax" type="text" maxlength="30" value="<?=$this->row->fax ?>" style="width:250px" class="fax">
+        </p>
+    </fieldset>
+
+    <?
+        if ($this->row->newArticle == 'Y') {
+            $newArticlechecked = 'checked';
+        } else {
+            $newArticlechecked = '';
+        }
+        if ($this->row->monthlyList == 'Y') {
+            $monthlyListchecked = 'checked';
+        } else {
+            $monthlyListchecked = '';
+        }
+        if (in_array($this->row->packageId,array('8','18','11'))) {
+            if ($this->row->weeklyList == 'Y') {
+                $weeklyListchecked = 'checked';
+            } else {
+                $weeklyListchecked = '';
+            }
+        }
+    ?>
+    <fieldset>
+        <legend>Newsletter</legend>
+        <p>
+            <input type="checkbox" name="newArticle" value="1" <?=$newArticlechecked;?>>&nbsp;News article<br>
+            <? if (isset($weeklyListchecked)) : ?>
+            <input type="checkbox" name="newWeeklyRegulation" value="1" <?=$weeklyListchecked;?>>&nbsp;Weekly regulations<br>
+            <? endif; ?>
+            <input type="checkbox" name="newRegulation" value="1" <?=$monthlyListchecked;?>>&nbsp;Monthly regulations
+        </p>
+    </fieldset>
+
+    <p>
+        <input class="btn btn-green big" value="Update" type="submit" />
+        <input class="btn btn-green big" value="Reset" type="reset" />
+    </p>
+    
+    <input type="hidden" name="kopel" id="kopel" value="<?=$this->row->kopel;?>">
+
+    <div class="clear">&nbsp;</div>
+</form>
+<script type="text/javascript">
+$(document).ready(function() {
+    $("#frmEditProfile").validate({
+        rules: {
+            fullName: "required",
+            day: "required",
+            year: "required",
+            education: "required",
+            expense: "required",
+            businessType: "required"
+        },
+        messages: {
+        }
+    });
+});
+</script>

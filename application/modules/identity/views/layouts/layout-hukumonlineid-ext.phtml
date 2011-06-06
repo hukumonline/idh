@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>hukumonline.com Lupa Sandi</title>
+	<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+    <link href="<?=$this->cdn('styles')?>/favicon.ico" rel="shortcut icon" type="image/ico" />
+    <link href="<?=$this->cdn('styles')?>/typography-1.css" media="screen" rel="stylesheet" type="text/css" />
+    <link href="<?=$this->cdn('styles')?>/validate.css" media="screen" rel="stylesheet" type="text/css" />
+	<script type="text/javascript" src="<?=$this->cdn('scripts')?>/index.php?c=auto&amp;f=,hol/jquery/jquery-1.2.3.pack.js,hol/jquery/form/jquery.form.js,hol/jquery/form/jquery.delegate.js,hol/jquery/form/jquery.validate.pack.js" ></script>
+	
+    <!-- Internet Explorer Fixes -->
+    <!--[if IE]>
+
+    <link rel="stylesheet" type="text/css" media="all" href="<?=$this->cdn('styles')?>/ie.css"/>
+
+    <script src="<?=$this->cdn('scripts')?>/hol/html5.js"></script>
+
+    <![endif]-->
+    <!--Upgrade MSIE5.5-7 to be compatible with MSIE8: http://ie7-js.googlecode.com/svn/version/2.1(beta3)/IE8.js -->
+    <!--[if lt IE 8]>
+
+    <script src="<?=$this->cdn('scripts')?>/hol/IE8.js"></script>
+
+    <![endif]-->
+
+</head>
+<body>
+    <div id="page">
+        <div class="wrapper">
+			<div id="judul"><a href="<?=KUTU_ROOT_URL;?>"><img src="<?=$this->cdn('images');?>/holid.jpg" alt="hukumonline" /></a></div>
+			<div class="align-left">
+			<small>Buat Akun HukumonlineID</small>
+			</div>
+			<div class="align-right">
+			    <a href="http://www.hukumonline.com">hukumonline.com</a> | <a href="http://en.hukumonline.com">en.hukumonline.com</a> | <a href="http://www.hukumpedia.com">hukumpedia.com</a> | <a href="http://forum.hukumonline.com">forum.hukumonline.com</a>
+			</div>
+			<div class="clear">&nbsp;</div>
+			<hr>
+            <?=$this->layout()->content;?>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,52 @@
+/* ######### CSS for Indented CSS Tabs. Remove if not using ######### */
+
+
+.indentmenu{
+font: bold 9px Arial;
+padding-top: 6px;
+}
+
+.indentmenu ul{
+font: bold 9px Arial;
+margin: 0;
+padding: 0;
+float: center;
+}
+
+.indentmenu ul li{
+font: bold 9px Arial;
+display: inline;
+}
+
+.indentmenu ul li a{
+font: bold 9px Arial;
+float: center;
+color: blue; /*text color*/
+padding: 5px 11px;
+text-decoration: none;
+}
+
+.indentmenu ul li a:visited{
+font: bold 9px Arial;
+color: blue;
+}
+
+.indentmenu ul li a.selected{
+font: bolder 10px Arial;
+color: #0000cd;
+padding-top: 2px; /*shift text down 1px*/
+padding-bottom: 4px;
+ background: #d3dde9;
+}
+
+
+.tabcontentstyle{
+padding-top: 5px;
+background: #F1F5FA;
+width: 450px;
+}
+
+.tabcontent{
+padding-top: 5px;
+display:none;
+}

@@ -1,0 +1,137 @@
+<!-- our error cc -->
+<div class="cc">
+<ol>
+	<li></li>
+</ol>
+</div>
+<form id="frmEditProfile" name="frmEditProfile" method="post" action="">
+<?php $formater = new Kutu_Lib_Formater(); ?>
+<table>
+<tbody>
+<tr>
+	<td><label for="paket">Pilihan paket</label></td>
+	<td><?=$this->getGroupName($this->row->packageId);?></td>
+</tr>
+<tr>
+	<td><label for="fullName" class="input required">Nama Lengkap</label></td>
+	<td><input name="fullName" id="fullName" value="<?=$this->row->fullName ?>" type="text" maxlength="25" style="width:340px"></td>
+</tr>
+<tr>
+	<td><label for="chkGender">Gender</label></td>
+	<td>
+		<?php if ($this->row->gender == "L") { ?>
+		Pria&nbsp;<input name="chkGender" id="chkGender" value="1" type="radio" checked>
+		Wanita&nbsp;<input name="chkGender" id="chkGender" value="0" type="radio">
+		<?php } else { ?>
+		Pria&nbsp;<input name="chkGender" id="chkGender" value="1" type="radio">
+		Wanita&nbsp;<input name="chkGender" id="chkGender" value="0" type="radio" checked>
+		<?php } ?>
+	</td>
+</tr>
+<?php 
+	$lang['months'] = array("Januari","Februari","Maret","April","Mei","Juni","Juli","Agustus","September","Oktober","November","Desember");
+	if ($this->row->birthday) {
+	$bdate = $this->row->birthday;
+	$adate = explode('-',$bdate);
+	$year = $adate[0];
+	$month = $adate[1];
+	$day = $adate[2];
+?>
+<tr>
+	<td><label for="birthOfDate" class="input required">Tgl. Lahir</label></td>
+	<td><?=$formater->monthPullDown($month,$lang['months']).$formater->dayPullDown(str_replace(0,'',$day)) ?><input name="year" id="year" type="text" maxlength="4" value="<?=$year;?>" style="width:60px" class="required year"></td>
+</tr>
+<?php } else { ?>
+<tr>
+	<td><label for="birthOfDate" class="input required">Tgl. Lahir</label></td>
+	<td><?=$formater->monthPullDown(date("n"),$lang['months']).$formater->dayPullDown(); ?><input name="year" id="year" type="text" maxlength="4" style="width:60px"></td>
+</tr>
+<?php } ?>		
+<tr>
+	<td><label for="education" class="input required">Pendidikan</label></td>
+	<td><?=$formater->educationPullDown($this->row->educationId) ?></td>
+</tr>
+<tr>
+	<td><label for="expense" class="input required">Pengeluaran dalam Sebulan</label></td>
+	<td><?=$formater->expensePullDown($this->row->expenseId) ?></td>
+</tr>
+<tr>
+	<td><label for="company">Nama Perusahaan</label></td>
+	<td><?=$this->row->company ?></td>
+</tr>
+<tr>
+	<td><label for="businessType" class="input required">Jenis Usaha</label></td>
+	<td><?=$formater->businessTypePullDown($this->row->businessTypeId) ?></td>
+</tr>
+<tr>
+	<td><label for="phone">Telepon</label></td>
+	<td><input name="phone" id="phone" type="text" maxlength="30" value="<?=$this->row->phone ?>" style="width:250px"></td>
+</tr>
+<tr>
+	<td><label for="fax">Fax</label></td>
+	<td><input name="fax" id="fax" type="text" maxlength="30" value="<?=$this->row->fax ?>" style="width:250px" class="fax"></td>
+</tr>
+<tr>
+	<td>Berita</td>
+	<td>
+    	<?php 
+			if ($this->row->newArticle == 'Y') {
+				$newArticlechecked = 'checked';
+			} else {
+				$newArticlechecked = '';
+			}
+			if ($this->row->monthlyList == 'Y') {
+				$monthlyListchecked = 'checked';
+			} else {
+				$monthlyListchecked = '';
+			}
+			if ($this->row->packageId == 27) {
+				if ($this->row->weeklyList == 'Y') {
+					$weeklyListchecked = 'checked';
+				} else {
+					$weeklyListchecked = '';
+				}
+			}
+    	?>
+    	<input type="checkbox" name="newArtikel" value="1" <?=$newArticlechecked ?>>&nbsp;Artikel Berita Terbaru<br>
+    	<input type="checkbox" name="newWeeklyRegulation" value="1" id="newWeeklyRegulation" <?=$weeklyListchecked ?>>&nbsp;Daftar Peraturan Mingguan<br>
+    	<input type="checkbox" name="newRegulation" value="1" <?=$monthlyListchecked ?>>&nbsp;Daftar Peraturan Bulanan
+	</td>
+</tr>				
+</tbody>
+</table>
+<input type="hidden" name="guid" id="guid" value="<?=$this->row->guid;?>">
+<p class="buttons"><input value="Ubah" type="submit"></p>
+</form>
+<script type="text/javascript">
+$(document).ready(function() {
+	var cc = $('div.cc');
+	$("#frmEditProfile").validate({
+		errorContainer: cc,
+		errorLabelContainer: $("ol", cc),
+		wrapper: 'li',
+		meta: "validate",
+		rules: {
+			fullName: "required",
+			day: "required",
+			year: "required",
+			education: "required",
+			expense: "required",
+			businessType: "required"
+		},
+		messages: {
+			fullName: "Nama lengkap diisi",
+			day: "Tgl. lahir diisi",
+			year: "Tahun lahir diisi",
+			expense: "Pilih pengeluaran mu dalam sebulan",
+			education: "Pilih pendidikan",
+			businessType: "Pilih jenis usaha"
+		}
+	});
+	var message = "<?echo $this->message;?>";
+	if(message!="")
+	{
+		alert (message);
+	}
+});
+</script>

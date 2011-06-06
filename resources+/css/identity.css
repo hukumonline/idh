@@ -1,0 +1,20 @@
+/* 
+    Document   : identity
+    Created on : Jan 3, 2011, 10:35:59 AM
+    Author     : nihki <nihki@madaniyah.com>
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+/* 
+   TODO customize this sample style
+   Syntax recommendation http://www.w3.org/TR/REC-CSS2/
+*/
+
+#psetting		{ margin-left: 0; margin-top: 5px; margin-bottom:0;  padding-left: 0;}
+#psetting li 	{ list-style: none;padding-left: 25px; background-image: url(../images/arrow02.jpg); background-repeat: no-repeat; background-position: 0 .6em;  padding-top:5px; padding-bottom: 5px; }
+#psetting a, #psetting a:visited, #psetting a:link  { color: #004276; text-decoration: none;}
+#psetting a:hover	{ color:#B79C00; text-decoration: underline;}
+
+
+.form-button{overflow:visible;width:auto;border:0;padding:4px 10px;background:#264264;color:#ffffff;font:11px Helvetica, arial, sans-serif !important;cursor:pointer;text-align:center;vertical-align:middle;border-left:1px solid #928fac;border-right:1px solid #928fac;background:white url(../images/bg_button.png) repeat;}

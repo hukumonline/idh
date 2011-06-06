@@ -1,0 +1,143 @@
+<div id="wait"></div>
+<div id="judul"><a href="<?=KUTU_ROOT_URL;?>"><img src="<?=$this->cdn('images');?>/holid.jpg" alt="hukumonline" /></a></div>
+<div class="align-left">
+<small>Buat Akun HukumonlineID</small>
+</div>
+<div class="align-right">
+    <a href="http://www.hukumonline.com">hukumonline.com</a> | <a href="http://en.hukumonline.com">en.hukumonline.com</a> | <a href="http://www.hukumpedia.com">hukumpedia.com</a> | <a href="http://forum.hukumonline.com">forum.hukumonline.com</a>
+</div>
+<div class="clear">&nbsp;</div>
+<hr>
+<section class="column first">
+    <div class="colgroup leading">
+        <div class="column width6 first">
+            <p><?=$this->content ?></p>
+        </div>
+        <div class="column width2"" style="padding-top:10px">
+            
+            <div class="corner-tl corner-tr corner-bl corner-br" style="border:1px solid #cecece;">
+                <div class="ta-center" style="padding-top:5px">
+                    Masuk dengan Hukumonline <br/>
+                    <img src="<?=$this->cdn('images'); ?>/holid2.jpg" height="25" border="0" align="middle"> Akun
+                </div>
+                <br/>
+                <?
+				$my_access = new Kutu_Core_Hol_Auth();
+				$my_access->login_reader();
+                ?>
+                <form id="signin-form">
+                    <div style="padding-left:5px">
+                    <dl>
+                        <dt><label for="identity">Pengguna</label></dt>
+                        <dd><input name="username" id="username" size="18" tabindex="1" value="<?=$my_access->user; ?>" type="text"></dd>
+                    </dl>
+                    <dl>
+                        <dt><label for="password">Sandi</label></dt>
+                        <dd><input id="password" name="password" size="18" tabindex="2" type="password" value="<?=$my_access->user_pw; ?>"></dd>
+                    </dl>
+					<dl>
+						<dt style="width:110px;"><input id="remember" name="remember" tabindex="3" type="checkbox" value="yes"<?=($my_access->is_cookie == true) ? " checked" : ""; ?>>&nbsp;&nbsp;<label for="remember">Tetap login</label></dt>
+					</dl>
+                    <dl>
+                        <dt>
+                        <input tabindex="4" value="Masuk" type="submit" id="submit" class="btn" />
+                        <input name="returnTo" id="returnTo" type="hidden" value="<?=$this->returnTo; ?>" />
+                        </dt>
+                    </dl>
+                    </div>
+                </form>
+                <div class="ta-left" style="padding: 5px;">
+                    <a href="<?=$this->baseUrl();?>/identity/lupasandi" title="Recover Account">Lupa ID or sandi ?</a>
+                    <h5>Tidak punya Hukumonline! ID?</h5>
+                    daftar nya mudah.
+                    <ul>
+                        <li><a href="<?=$this->baseUrl;?>/identity/daftar" title="Sign Up">Daftar</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div style="padding-top:5px"></div>
+            <div class="corner-tl corner-tr corner-bl corner-br" style="border:1px solid #cecece;">
+                <div class="ta-left" style="padding:10px;">
+                    <abbr>Satu Hukumonline!ID</abbr>
+                    Gunakan ID anda untuk Hukumonline Indonesia, Hukumonline English, Hukumpedia dan Forum.
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+	
+	var waitId		=	'#wait';							// wait message container
+	var formId		=	'#signin-form';						// submit button identifier
+	var userId		=	'#username';						// user input identifier
+	var passId		=	'#password';						// password input identifier
+	var returnTo	=	'#returnTo';						// password input identifier
+	var remember	=	'#remember:checked';						
+	// var remember	=	'input:checkbox[name=remember]:checked';						
+	
+	var waitNote	=	'Loading...';						// loading message
+	var jsErrMsg	=	'User or password is not valid';	// clientside error message
+	
+	var postFile	=	'<?=$this->baseUrl; ?>/identity/klogin';				// post handler
+	
+	var autoRedir	=	false;								// auto redirect on success
+	
+	// hide first
+	$(waitId).hide(); 
+
+	// FirstLoad
+	$(waitId).html(waitNote).fadeIn('fast',function(){
+		$(waitId).fadeOut('fast',function(){
+			$(formId).submit( function() {
+				$(waitId).html(waitNote).fadeIn();
+				
+				var _u = $(userId).val();
+				var _p = $(passId).val();
+				var _r = $(returnTo).val();
+				var _s = $(remember).val();
+				
+				if(_u.length<4) 
+				{
+					$(waitId).html(jsErrMsg).fadeIn('fast',function(){
+						$(userId).focus();
+					});
+				}
+				else
+				{
+					if(_p.length<4)
+					{
+						$(waitId).html(jsErrMsg).fadeIn('fast',function(){
+							$(passId).focus();
+						});
+					}
+					else
+					{
+						$.post(postFile, { u: _u, p: _p, r: _r, s: _s }, function(data) {
+							if(data.success==true) {
+								$(waitId).html(data.msg).slideDown('fast', function(){
+									//location.reload(true);
+									window.location = data.message;
+								});
+							}
+							else
+							{
+								$(waitId).html(data.error).slideDown('fast', function(){
+									$(userId).focus();
+								});
+							}
+						},'json');
+					}
+				}
+				return false;
+			});
+			$(userId).focus();
+		}).html();
+	});
+});
+</script>

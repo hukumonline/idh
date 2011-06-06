@@ -1,0 +1,60 @@
+<form enctype="multipart/form-data" id="frmUploadFoto" name="frmUploadFoto" method="post" action="">
+<p>Upload foto</p><br>
+<table>
+<tr>
+	<td>Foto</td>
+	<td>
+	<?php
+	$arraypictureformat = array("jpg", "jpeg", "gif");
+	$txt_allowedformat = implode('; ', $arraypictureformat);
+	$sDir = KUTU_ROOT_DIR.DIRECTORY_SEPARATOR.'uploads'.DIRECTORY_SEPARATOR.'images';
+	$sDir2 = KUTU_ROOT_URL.'/uploads/images/';
+	$x = 0;
+	foreach ($arraypictureformat as $key => $val) {
+		if (is_file($sDir."/".$this->row->guid.".".$val)) {
+			$myphoto = $sDir."/".$this->row->guid.".".$val;
+			$myext = $val;
+			$x = 1;
+			break;
+		}
+	}
+	if ($x == 1) {
+		$myphotosize = getimagesize($myphoto);
+		$dis = "";
+		if (isset($myext) && is_file($sDir."/".$this->row->guid.".".$myext)) 
+			$txt_existence = "<img src=\"".$sDir2.$this->row->guid.".".$myext."\" width=".$myphotosize[0]." height=".$myphotosize[1]." />";
+		
+		//$txt_existence = "<img src=\"".KUTU_ROOT_URL."/resources/img/gif/view.gif\" border=\"0\" onclick=\"javascript: window.open('".ROOT_URL."/admin/user/frame/pic/".$this->row->guid."/ext/".$myext."', 'PhotoFrame', 'width=".$myphotosize[0].", height=".$myphotosize[1].", toolbar=no, resizable=no, scrollbars=no, status=no, menubar=no, location=no, directories=no'); self.blur();\" />";
+	}
+	else 
+	{
+		$dis = " disabled";
+		$txt_existence = "<img src=\"".KUTU_ROOT_URL."/resources/images/no_avatar.png\" border=\"0\" />";
+	}
+	?>
+	<table>
+	<tr>
+		<td width=5%><?=$txt_existence; ?></td>
+		<td width=15%><input type="checkbox" name="txt_erase"<?=$dis; ?> />&nbsp;Hapus</td>
+		<td><input type="file" name="file_picture" size="25" />&nbsp;(opsional)</td>
+	</tr>
+	<tr>
+		<td colspan="3">Ukuran gambar lebar max. 200px dan tinggi max. 250px</td>
+	</tr>
+	<tr>
+		<td colspan="3">Format foto yang diperkenankan: <?=$txt_allowedformat; ?></td>
+	</tr>
+	</table>
+	</td>
+</tr>
+</table>
+<p class="buttons"><input value="Upload" type="submit"></p>
+
+</form>
+<script type="text/javascript">
+var message = "<?echo $this->message;?>";
+if(message!="")
+{
+	alert (message);
+}
+</script>

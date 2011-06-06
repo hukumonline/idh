@@ -1,0 +1,34 @@
+<fieldset>
+<legend>TRANSACTION HISTORY</legend>
+<table class="display stylized" id="transactionhistory">
+<thead>
+    <tr>
+        <th>No</th>
+        <th>Order ID</th>
+        <th>Invoice</th>
+        <th>Payment Method</th>
+        <th>Purchasing Date</th>
+        <th>Order Status</th>
+        <th>Total Price</th>
+        <th>Qty</th>
+    </tr>
+</thead>
+<tbody>
+    <?
+    $i=1;
+    foreach ($this->listOrder as $row):
+    ?>
+    <tr class="<?=($i%2 ? 'gradeX' : 'gradeC');?>" id="row_<?=$row['orderId'];?>">
+        <td><?=$i?></td>
+        <td class="center"><?=$row['orderId'];?></td>
+        <td><?=$row['invoiceNumber'];?></td>
+        <td class="ta-center"><?=$row['paymentMethod'];?></td>
+        <td class="center"><?=strftime("%d-%m-%Y", strtotime($row['datePurchased']));?></td>
+        <td><?=$row['ordersStatus'];?></td>
+        <td><?= number_format($row['orderTotal'],0,',','.');?></td>
+        <td><?=$row['countTotal'];?></td>
+    </tr>
+    <? $i++; endforeach; ?>
+</tbody>
+</table>
+</fieldset>

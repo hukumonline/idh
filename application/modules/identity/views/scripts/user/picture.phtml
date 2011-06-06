@@ -1,0 +1,71 @@
+<? if (isset($this->message)): ?>
+<fieldset>
+    <legend>INFORMATION SAVED</legend>
+    <div class="box box-info closeable">
+        <?= $this->message; ?>
+    </div>
+</fieldset>
+<? endif; ?>
+
+<form enctype="multipart/form-data" id="frmUploadFoto" name="frmUploadFoto" method="post" action="">
+    <fieldset>
+        <legend>UPLOAD PHOTO</legend>
+        <p>
+	<?php
+	$arraypictureformat = array("jpg", "jpeg", "gif");
+	$txt_allowedformat = implode('; ', $arraypictureformat);
+	
+	$registry = Zend_Registry::getInstance();
+    $config = $registry->get('config');
+    $cdn = $config->cdn;
+    $sDir = $cdn->static->dir->photo;
+    $sDir2 = $cdn->static->url->photo.DIRECTORY_SEPARATOR;
+	
+	//$sDir = KUTU_ROOT_DIR.DIRECTORY_SEPARATOR.'uploads'.DIRECTORY_SEPARATOR.'photo';
+	//$sDir2 = KUTU_ROOT_URL.'/uploads/photo/';
+	
+	$x = 0;
+	foreach ($arraypictureformat as $key => $val) {
+		if (is_file($sDir."/".$this->row->kopel.".".$val)) {
+			$myphoto = $sDir."/".$this->row->kopel.".".$val;
+			$myext = $val;
+			$x = 1;
+			break;
+		}
+	}
+	if ($x == 1) {
+		$myphotosize = getimagesize($myphoto);
+		$dis = "";
+		if (isset($myext) && is_file($sDir."/".$this->row->kopel.".".$myext))
+			$txt_existence = "<img src=\"".$sDir2.$this->row->kopel.".".$myext."\" width=".$myphotosize[0]." height=".$myphotosize[1]." />";
+
+		//$txt_existence = "<img src=\"".KUTU_ROOT_URL."/resources/img/gif/view.gif\" border=\"0\" onclick=\"javascript: window.open('".ROOT_URL."/admin/user/frame/pic/".$this->row->kopel."/ext/".$myext."', 'PhotoFrame', 'width=".$myphotosize[0].", height=".$myphotosize[1].", toolbar=no, resizable=no, scrollbars=no, status=no, menubar=no, location=no, directories=no'); self.blur();\" />";
+	}
+	else
+	{
+		$dis = " disabled";
+		$txt_existence = "<img src=\"".$this->cdn."/gravatar-140.png\" border=\"0\" />";
+	}
+	?>
+            
+            <label for="photo"><?=$txt_existence; ?></label>
+            <input type="checkbox" name="txt_erase"<?=$dis; ?> />&nbsp;Delete
+        </p>
+        <p>
+            <input type="file" name="file_picture" size="25" />&nbsp;(opsional)
+        </p>
+        <p>
+            <label>Picture width max. 200px dan height max. 250px</label>
+        </p>
+        <p>
+            <label>Format picture allowed: <?=$txt_allowedformat; ?></label>
+        </p>
+    </fieldset>
+    <p>
+        <input class="btn btn-green big" value="Upload" type="submit" />
+    </p>
+
+    <input type="hidden" name="kopel" id="kopel" value="<?=$this->row->kopel;?>">
+
+    <div class="clear">&nbsp;</div>
+</form>

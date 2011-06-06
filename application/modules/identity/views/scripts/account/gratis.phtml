@@ -1,0 +1,284 @@
+<!-- our error cc -->
+<div class="cc">
+<ol>
+	<li></li>
+</ol>
+</div>
+<form id="registration_form" name="registration_form" method="post" action="">
+<h2>Informasi yang diperlukan untuk Akun Hukumonline</h2><br>
+<?php $formater = new Kutu_Lib_Formater(); ?>
+<table>
+<tbody>
+<tr>
+	<td width=25%><label>Pilihan paket</label></td>
+	<td>Gratis <a href="<?=$this->baseUrl; ?>/identity/daftar/paket/anggota-biasa" target="_blank">&lt;<i>Lihat deskripsi paket</i>&gt;</a></td>
+</tr>
+<tr>
+	<td><label for="fullName" class="input required">Nama Lengkap</label></td>
+	<td><input name="fullName" id="fullName" value="" type="text" maxlength="25" style="width:340px"></td>
+</tr>
+<tr>
+	<td><label for="chkGender">Gender</label></td>
+	<td>
+		Pria&nbsp;<input name="chkGender" id="chkGender" value="1" type="radio" checked>
+		Wanita&nbsp;<input name="chkGender" id="chkGender" value="0" type="radio">
+	</td>
+</tr>
+<?php 
+	$lang['months'] = array("Januari","Februari","Maret","April","Mei","Juni","Juli","Agustus","September","Oktober","November","Desember");
+?>
+
+<tr>
+	<td><label for="birthOfDate" class="input required">Tgl. Lahir</label></td>
+	<td><?=$formater->monthPullDown(date("n"),$lang['months']).$formater->dayPullDown(); ?><input name="year" id="year" type="text" maxlength="4" style="width:60px" class="required year"></td>
+</tr>
+<tr>
+	<td><label for="education" class="input required">Pendidikan</label></td>
+	<td><?=$formater->educationPullDown(); ?></td>
+</tr>
+<tr>
+	<td><label for="expense" class="input required">Pengeluaran dalam Sebulan</label></td>
+	<td><?=$formater->expensePullDown() ?></td>
+</tr>
+<tr>
+	<td><label for="company">Nama Perusahaan</label></td>
+	<td><input name="company" id="company" type="text" maxlength="255" style="width:300px"></td>
+</tr>
+<tr>
+	<td><label for="businessType" class="input required">Jenis Usaha</label></td>
+	<td><?=$formater->businessTypePullDown(); ?></td>
+</tr>
+<tr>
+	<td><label for="phone">Telp</label></td>
+	<td><input name="phone" id="phone" type="text" maxlength="30" style="width:250px"></td>
+</tr>
+<tr>
+	<td><label for="fax">Fax</label></td>
+	<td><input name="fax" id="fax" type="text" maxlength="30" style="width:250px" class="fax"></td>
+</tr>
+</tbody>
+</table>
+
+<h2>1. Ketik Nama Pengguna</h2>
+
+<p>Kamu bisa pilih nama pengguna untuk digunakan di Hukumonline.</p><br>
+
+<table>
+<tbody>
+<tr>
+	<td width=25%><label for="username" class="input required">Nama Pengguna</label></td>
+	<td><input name="username" id="username" type="text" maxlength="50" style="width:340px"><br><span class="example">Contoh:zapatista</span></td>
+</tr>
+<tr>
+	<td>&nbsp;</td>
+	<td><input name="chkavailable1" id="chkavailable1" type="button" value="Cek Nama Penggunaku" onClick='chkavailable(1); return false;'></td>
+</tr>
+<tr class='row1'></tr>
+</tbody>
+</table>
+	
+<h2>2. <span>Ketik Sandi</span></h2>
+
+<p>Nama Sandi ini akan digunakan jika anda ingin mengakses ke Hukumonline.</p><br>
+	
+<table>
+<tbody>
+<tr>
+  	<td width=25%><label for="password" class="input required">Buat sandi</label></td>
+   	<td><input id="password" name="password" type="password" class="password"></td>
+</tr>
+<tr class="form_item" id="password_confirm_row">
+   	<td class="form_title"><label for="password-confirm" class="input required">Masukkan lagi</label></td>
+   	<td><input name="password_confirm" id="password-confirm" type="password"></td>
+</tr>
+</tbody>
+</table>
+	
+<h2>3. Masukkan alamat email kamu</h2>
+
+	<p>Alamat email kamu penting, dengan memberikan alamat email akan dapat membantu kamu<br> jika
+	suatu saat kamu lupa informasi akunmu.</p><br>
+
+<table>
+<tbody>
+<tr>
+	<td width=15%><label for="email" class="input required">E-mail</label></td>
+	<td><input name="email" id="email" type="text" maxlength="50" style="width:250px"><br><span class="example">Contoh:zapatista@hukumonline.com</span></td>
+</tr>
+<tr>
+	<td>&nbsp;</td>
+	<td><input name="chkavailable2" id="chkavailable2" type="button" value="Cek emailku" onClick='chkavailableEmail(); return false;'><span id="msgbox1" style="display:none"></span></td>
+</tr>
+</tbody>
+</table>
+
+<table>
+<tbody>
+<tr>
+	<td width="12%">Berita</td>
+	<td>
+		<input type="checkbox" name="newArtikel" value="1" checked>&nbsp;Artikel Berita Terbaru<br>
+		<input type="checkbox" name="newRegulation" value="1">&nbsp;Daftar Peraturan Bulanan
+	</td>
+</tr>				
+</tbody>
+</table>
+
+<table>
+<tbody>
+<tr class="radiochecks">
+	<td width="2%" nowrap><input name="agree" id="agree" type="checkbox"></td>
+	<td colspan="2"><label for="agree" class="input required">Saya setuju  dengan aturan pemakaian</label></td>
+</tr>
+<tr>
+	<td>&nbsp;</td>
+	<td><a href="<?=$this->baseUrl; ?>/identity/daftar/aturan.pakai" target="_blank">Baca aturan pakai</a></td>
+</tr>
+<tr>
+	<td>&nbsp;</td>
+	<td></td>
+</tr>
+</tbody>
+</table>
+
+<p class="buttons"><input value="Buat akunku" type="submit"></p>
+
+</form><br>
+<script type="text/javascript">
+	var cc = $('div.cc');
+	$('.password').pstrength();
+	$("#registration_form").validate({
+		errorContainer: cc,
+		errorLabelContainer: $("ol", cc),
+		wrapper: 'li',
+		meta: "validate",
+		rules: {
+			fullName: "required",
+			day: "required",
+			year: "required",
+			education: "required",
+			expense: "required",
+			businessType: "required",
+			username: {
+				required: true,
+				minLength: 2
+			},
+			password: {
+				required: true,
+				minLength: 8
+			},
+			password_confirm: {
+				required: true,
+				minLength: 8,
+				equalTo: "#password"
+			},
+			email: {
+				required: true,
+				email: true
+			},
+			agree: "required"
+		},
+		messages: {
+			fullName: "Nama lengkap diisi",
+			day: "Tgl. lahir diisi",
+			year: "Tahun lahir diisi",
+			expense: "Pilih pengeluaran mu dalam sebulan",
+			education: "Pilih pendidikan",
+			businessType: "Pilih jenis usaha",
+			username: {
+				required: "Nama pengguna diwajibkan",
+				minLength: "Nama pengguna paling sedikit 2 karakter"
+			},
+			password: {
+				required: "Masukkan kata sandi",
+				minLength: "Kata sandi panjangnya paling sedikit 8 karakter"
+			},
+			password_confirm: {
+				required: "Harap isi konfirmasi kata sandi",
+				minLength: "Kata sandi panjangnya paling sedikit 8 karakter",
+				equalTo: "Masukkan kata sandi sama dengan yang diatas"
+			},
+			email: "Email diisi",
+			agree: "<< <i>Centang aturan pemakaian</i> >>"
+		}
+	});
+	function chkavailable(id) {
+		var uname = $('#username').attr('value');
+		
+		/* Just to be sure .. remove any changes from previous submit */
+		$('tr.row1').empty();												
+		
+		if (uname != "") {
+			$.ajax({
+				type: 'POST',
+				dataType: 'json',
+				url: '<?=$this->baseUrl;?>/identity/get.me.username',
+				data: 'username='+ uname,
+				success: function(json) {
+					if( json.success == "true" ) {
+						
+						var html = '<td colspan="5" style="color: #7ebddd;margin-bottom: 1.5em; padding-left: 10em; background-repeat: no-repeat; background-position: 0 .2em;">' + json.data + '</td>';
+						$('tr.row' + id).prepend(html);						
+						
+					} else {
+						
+						if (json.error == "1") {
+							var html = '<td colspan="5" style="color: #f00;margin-bottom: 1.5em; padding-left: 7em; background-repeat: no-repeat; background-position: 0 .2em;">' + json.err1 + '</td>';
+						} else if (json.error == "2") {
+							var html = '<td colspan="5" style="color: #f00;margin-bottom: 1.5em; padding-left: 7em; background-repeat: no-repeat; background-position: 0 .2em;">' + json.err2 + '</td>';
+						} else if (json.error == "3") {
+							var html = '<td colspan="5" style="color: #f00;margin-bottom: 1.5em; padding-left: 7em; background-repeat: no-repeat; background-position: 0 .2em;">' + json.err3 + '</td>';
+						}
+						
+						$('tr.row1').prepend(html);						
+						
+					}
+				},
+				failure: function(json) {
+					
+				}
+			});
+		} 
+	}
+	function chkavailableEmail() {
+		var email = $('#email').attr('value');
+		
+		if (email != "") {
+			$.ajax({
+				type: 'POST',
+				dataType: 'json',
+				url: '<?=$this->baseUrl;?>/identity/get.me.email',
+				beforeSend: GetprepareData,
+				data: 'email='+ email,
+				success: function(json) {
+					if (json.success == true)
+					{
+					  	$("#msgbox1").fadeTo(200,0.1,function()  //start fading the messagebox
+						{ 
+							$(this).html(json.message).addClass('messageboxok').fadeTo(900,1);
+						});
+					}
+					else
+					{
+					  	$("#msgbox1").fadeTo(200,0.1,function() //start fading the messagebox
+						{ 
+						  	$(this).html(json.message).addClass('messageboxerror').fadeTo(900,1);
+						});		
+					}
+				},
+				failure: function(json) {
+					
+				}
+			});
+		} 
+	}
+	function GetprepareData()
+	{
+	   	$("#msgbox1").removeClass().addClass('messagebox').text('Validating ...').fadeIn(1000);
+	}
+	var message = "<?echo $this->message;?>";
+	if(message!="")
+	{
+		alert (message);
+	}
+</script>

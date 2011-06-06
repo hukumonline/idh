@@ -1,0 +1,88 @@
+/**** Styles for Event Calender ****/
+
+.calendar { 
+
+	/** configure the width **/
+	width:210px;
+	background-color: #D6E8FF;
+	border: 1px solid #000000;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	margin:0px;
+	padding:0px;
+	text-align:center;
+}
+
+.main_tittle { 
+	color: #646D6D; 
+	font-family: "Verdana", Arial, Helvetica, sans-serif; 
+	font-size: 10px; 
+	text-align: left; 
+	padding-left: 10px;  
+	font-weight: bold;  
+	padding-right: 10px;  
+	padding-top: -10px;
+}
+
+.calendar th {
+	background-color: #FFFFCC;
+	font-weight: bold;
+	height: 20px;
+}
+
+.calendar .header {
+	background-color: #5670B3;
+	font-weight: bold;
+	height: 24px;
+	color: #FFFFFF;
+}
+
+.calendar .footer {
+	background-color: #5670B3;
+	font-weight: bold;
+	font-size:0.8em;
+	color: #FFFFFF;
+	width:100%;
+}
+
+.calendar a, .calendar a:link, .calendar a:hover {
+	font-size:10px; font-family:verdana, arial, helvetica; 
+	font-weight: bold;
+	text-decoration: underline;
+	color: #000000;
+}
+
+.calendar a.headerNav, .calendar a:link.headerNav, .calendar a:hover.headerNav {
+	background-color: #5670B3;
+	color: #ffffff;
+}
+
+.calendar a.footerNav, .calendar a:link.footerNav, .calendar a:hover.footerNav {
+	width: 100%;
+	background-color: #5670B3;
+	color: #ffffff;
+}
+
+/**** color and size of calendar cells.  ****/
+.day_cell				{ background-color:#EDECD8; height:35; width: 95; }
+.dayval_cell			{ background-color:#D4C9EF; height:35; width: 95; }
+.empty_day_cell			{ background-color:#EEEEEE; height:35; width: 95; }
+.today_cell				{ background-color:#F5F4ED; height:35; width: 95; }
+
+/**** day number in upper left corner of each cell ****/
+.day_number				{ font-size:10px; font-family:verdana, arial, helvetica; color:#000 }
+
+/**** title_txt is the text for each post on main page ****/
+.title_txt				{ font-size:10px; font-family:verdana, arial, helvetica; color:#000 }
+.title_txt A:link		{ color:#00F; text-decoration:underline }
+.title_txt A:active		{ color:#00F; text-decoration:underline }
+.title_txt A:visited	{ color:#00F; text-decoration:underline }
+.title_txt A:hover		{ color:#00F; text-decoration:underline }
+
+/**** time line under title text when event time given ****/
+.time_str				{ font-size:9px; font-family:arial, helvetica }
+
+/**** column headers or days of the week ****/
+.column_header			{ font-size:12px; font-family:verdana, arial; background-color:#2663E2; color:#FFFFFF; font-weight:bold }
+
+/**** End of event calender style ****/

@@ -1,0 +1,82 @@
+<!-- our error cc -->
+<div class="cc">
+<ol>
+	<li></li>
+</ol>
+</div>
+<form id="frmEditEmail" name="frmEditEmail" method="post" action="">
+<p>Informasi Alamat Surat</p><br>
+<table>
+<tr>
+	<td width=20%><label for="email" class="input required">Alamat surat</label></td>
+	<td><input name="email" id="email" type="text" maxlength="50" value="<?=$this->row->email;?>" style="width:250px"><br><span class="example">Contoh:emailmu@hukumonline.com</span></td>
+</tr>
+<tr>
+	<td>&nbsp;</td>
+	<td><input name="chkavailable2" id="chkavailable2" type="button" value="Cek emailku" onClick='chkavailableEmail(); return false;'><span id="msgbox1" style="display:none"></span></td>
+</tr>
+</table>
+<input type="hidden" name="guid" id="guid" value="<?=$this->row->guid;?>">
+<p class="buttons"><input value="Ubah" type="submit"></p>
+
+</form>
+<script type="text/javascript">
+var cc = $('div.cc');
+$('#frmEditEmail').validate({
+	errorContainer: cc,
+	errorLabelContainer: $("ol", cc),
+	wrapper: 'li',
+	meta: "validate",
+	rules: {
+		email: {
+			required: true,
+			email: true
+		}
+	},
+	messages: {
+		email: "Please enter a valid email address"
+	}
+});
+function chkavailableEmail() {
+	var email = $('#email').attr('value');
+	
+	if (email != "") {
+		$.ajax({
+			type: 'POST',
+			dataType: 'json',
+			url: '<?=$this->baseUrl;?>/identity/get.me.email',
+			beforeSend: GetprepareData,
+			data: 'email='+ email,
+			success: function(json) {
+				if (json.success == true)
+				{
+				  	$("#msgbox1").fadeTo(200,0.1,function()  //start fading the messagebox
+					{ 
+						$(this).html(json.message).addClass('messageboxok').fadeTo(900,1);
+					});
+				}
+				else
+				{
+				  	$("#msgbox1").fadeTo(200,0.1,function() //start fading the messagebox
+					{ 
+					  	$(this).html(json.message).addClass('messageboxerror').fadeTo(900,1);
+					});		
+				}
+			},
+			failure: function(json) {
+				
+			}
+		});
+	} 
+}
+function GetprepareData()
+{
+   	$("#msgbox1").removeClass().addClass('messagebox').text('Validating ...').fadeIn(1000);
+}
+
+var message = "<?echo $this->message;?>";
+if(message!="")
+{
+	alert (message);
+}
+</script>

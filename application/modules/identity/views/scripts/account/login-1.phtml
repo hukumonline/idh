@@ -1,0 +1,118 @@
+<div id="wait"></div>
+<div class="unit horizontal-center layout on-2 columns" style="padding-top:20px;">
+	<div class="fixed column" style="width:670px;padding-right:20px;">
+	<p><?=$this->content ?></p>
+	</div>
+	<div class="fixed column" style="width:300px;">
+		<div id="sidecontent">
+			<div style="text-align:center;">Masuk dengan Hukumonline<br>
+			<img src="<?=$this->cdn('images'); ?>/holid2.jpg" height="25" border="0" align="middle"> Akun
+			</div><br>
+			<?php
+			$my_access = new Kutu_Core_Hol_Auth();
+			$my_access->login_reader();
+			?>
+			<form id="signin-form" class="niceform">
+				<fieldset>
+					<dl>
+						<dt><label for="identity">Pengguna</label></dt>
+						<dd><input name="username" id="username" size="18" tabindex="1" value="<?=$my_access->user; ?>" type="text"></dd>
+					</dl>
+					<dl>
+						<dt><label for="password">Sandi</label></dt>
+						<dd><input id="password" name="password" size="18" tabindex="2" type="password" value="<?=$my_access->user_pw; ?>"></dd>
+					</dl>
+					<dl>
+						<dt style="width:110px;"><input id="remember" name="remember" tabindex="3" type="checkbox" value="yes"<?=($my_access->is_cookie == true) ? " checked" : ""; ?>>&nbsp;&nbsp;<label for="remember">Tetap login</label></dt>
+					</dl>
+				</fieldset>
+				<fieldset class="action">
+				<input tabindex="4" value="Masuk" type="submit" id="submit" />
+				</fieldset>
+				<input name="returnTo" id="returnTo" type="hidden" value="<?=$this->returnTo; ?>" />
+			</form>
+			<a href="<?=$this->baseUrl;?>/identity/lupasandi" title="Recover Account">Lupa ID or sandi ?</a>	
+			<h4>Tidak punya Hukumonline! ID?</h4>
+			daftar nya mudah.
+			<ul style="padding-left:15px;">
+				<li><a href="<?=$this->baseUrl;?>/identity/daftar" title="Sign Up">Daftar</a></li>
+			</ul>
+		</div>
+		<div id="sidecontent2">
+			<h3>Satu Hukumonline!ID</h3>
+			Gunakan ID anda untuk Hukumonline Indonesia, Hukumonline English, Hukumpedia dan Forum.
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+	
+	var waitId		=	'#wait';							// wait message container
+	var formId		=	'#signin-form';						// submit button identifier
+	var userId		=	'#username';						// user input identifier
+	var passId		=	'#password';						// password input identifier
+	var returnTo	=	'#returnTo';						// password input identifier
+	var remember	=	'#remember:checked';						
+	// var remember	=	'input:checkbox[name=remember]:checked';						
+	
+	var waitNote	=	'Loading...';						// loading message
+	var jsErrMsg	=	'User or password is not valid';	// clientside error message
+	
+	var postFile	=	'<?=$this->baseUrl; ?>/identity/klogin';				// post handler
+	
+	var autoRedir	=	false;								// auto redirect on success
+	
+	// hide first
+	$(waitId).hide(); 
+
+	// FirstLoad
+	$(waitId).html(waitNote).fadeIn('fast',function(){
+		$(waitId).fadeOut('fast',function(){
+			$(formId).submit( function() {
+				$(waitId).html(waitNote).fadeIn();
+				
+				var _u = $(userId).val();
+				var _p = $(passId).val();
+				var _r = $(returnTo).val();
+				var _s = $(remember).val();
+				
+				if(_u.length<4) 
+				{
+					$(waitId).html(jsErrMsg).fadeIn('fast',function(){
+						$(userId).focus();
+					});
+				}
+				else
+				{
+					if(_p.length<4)
+					{
+						$(waitId).html(jsErrMsg).fadeIn('fast',function(){
+							$(passId).focus();
+						});
+					}
+					else
+					{
+						$.post(postFile, { u: _u, p: _p, r: _r, s: _s }, function(data) {
+							if(data.success==true) {
+								$(waitId).html('Logging in').slideDown('fast', function(){
+									//location.reload(true);
+									window.location = data.message;
+								});
+							}
+							else
+							{
+								$(waitId).html(data.error).slideDown('fast', function(){
+									$(userId).focus();
+								});
+							}
+						},'json');
+					}
+				}
+				return false;
+			});
+			$(userId).focus();
+		}).html();
+	});
+});
+</script>

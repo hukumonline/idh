@@ -1,0 +1,51 @@
+<html>
+<head>
+<style type="text/css">
+body { background: #fff; color: #555555; }
+a:link, body_alink { color: #175c9e; text-decoration: none; }
+a:visited, body_avisited { color: #175c9e; text-decoration: none; }
+a:hover, a:active, body_ahover { color: #385F95; text-decoration: underline; }
+.tborder { background: #ffffff;	color: #000000;	border: 1px solid #dadada; }
+.tcat {	background: #ddd url(/assets/images/item-hd.gif) repeat-x 0 bottom;	color: #222; font-size: 12px; font-weight:bold;	padding:3px; }
+.tcat a:link, .tcat_alink {	color: #222; text-decoration: none; }
+.tcat a:visited, .tcat_avisited { color: #222; text-decoration: none; }
+.tcat a:hover, .tcat a:active, .tcat_ahover { color: #222; text-decoration: underline; }
+.panel { background: #f1f1f1; color: #000000; padding: 10px; border:0 none; }
+.panelsurround { background: #f1f1f1; color: #000000; }
+.smallfont { font-family:verdana, geneva, lucida, 'lucida grande', arial, helvetica, sans-serif; font-size:11px; }
+td { padding: 3px; }
+td.alt1,td.alt1Active,td.alt2 { border-left:1px solid #dddddd; border-bottom:1px solid #dddddd; padding:8px; }
+td.alt1 table td,td.alt1Active table td,td.alt2 table td { padding:0; }
+</style>
+<link href="<?php echo $this->getKutuRootUrl(); ?>/view-resources/ico/hole_small.ico" rel="shortcut icon">
+<script type="text/javascript">
+function delayedRedirect(){
+    window.location = "<?php echo $this->getKutuRootUrl(); ?>"
+}
+</script>
+</head>
+<body onLoad="setTimeout('delayedRedirect()', 3000)">
+<table class="tborder" cellpadding="6" cellspacing="1" border="0" width="70%" align="center">
+<tr>
+	<td class="tcat">Redirecting...</td>
+</tr>
+<tr>
+	<td class="panelsurround" align="center">
+	<div class="panel">
+			
+		<blockquote>
+
+			<p>&nbsp;</p>
+			<p><strong>Selamat Datang di Hukumonline.</strong></p>			
+			
+				<p class="smallfont"><a href="<?php echo $this->getKutuRootUrl(); ?>">Click here if your browser does not automatically redirect you.</a></p>
+				<div>&nbsp;</div>
+			
+		</blockquote>
+			
+	</div>
+	</td>
+</tr>
+</table>
+</body>
+</html>

@@ -1,0 +1,2 @@
+127.0.0.1 - - [28/Apr/2010:17:50:24 +0700] "GET /application/servers/session/savehandler HTTP/1.1" 200 863 "-" "Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.9.1.9) Gecko/20100315 Firefox/3.5.9"
+127.0.0.1 - - [28/Apr/2010:17:52:22 +0700] "GET /application/servers/session/savehandler HTTP/1.1" 200 9 "-" "Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.9.1.9) Gecko/20100315 Firefox/3.5.9"

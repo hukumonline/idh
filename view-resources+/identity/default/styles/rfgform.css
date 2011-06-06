@@ -1,0 +1,13 @@
+/**********************************
+
+Name: rfgform Styles
+
+***********************************/
+
+form.rfgform label.error, label.error {
+	/* remove the next line when you have trouble in IE6 with labels in list */
+	display: none;
+	color: red;
+}
+div.error { display: none; }
+input.error { border: 1px dotted red; }

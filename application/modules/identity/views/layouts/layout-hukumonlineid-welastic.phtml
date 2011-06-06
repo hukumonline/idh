@@ -1,0 +1,42 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>hukumonline.com Log In</title>
+	<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+	<link rel="shortcut icon" href="<?=$this->baseUrl;?>/resources/images/hole_small.ico" />
+	<script type="text/javascript" src="<?=$this->baseUrl; ?>/js/jquery/jquery-1.4.2.min.js"></script>
+	<link rel="stylesheet" type="text/css" media="all" href="<?=$this->baseUrl;?>/resources/css/elastic.css" />
+	<script src="<?=$this->baseUrl;?>/resources/css/elastic.js" type="text/javascript" language="javascript" charset="utf-8"></script>
+	<link rel="stylesheet" type="text/css" media="screen" href="<?=$this->baseUrl;?>/resources/css/typography.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="<?=$this->baseUrl;?>/resources/css/validate.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="<?=$this->baseUrl;?>/resources/css/niceforms-default.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="<?=$this->baseUrl;?>/resources/css/niceforms-ext.css" />
+	<script type="text/javascript" src="<?=$this->baseUrl; ?>/js/jquery/form/niceforms.js"></script>
+	<script type="text/javascript" src="<?=$this->baseUrl; ?>/js/jquery/form/jquery.form.js"></script>
+	<script type="text/javascript" src="<?=$this->baseUrl; ?>/js/jquery/form/jquery.delegate.js"></script>
+	<script type="text/javascript" src="<?=$this->baseUrl; ?>/js/jquery/form/jquery.validate.pack.js"></script>
+	<script type="text/javascript" src="<?=$this->baseUrl; ?>/js/jquery/form/jquery.highlightFade.js"></script>
+	<script type="text/javascript" src="<?=$this->baseUrl; ?>/js/jquery/form/jquery.pstrength.js"></script>
+	<script type="text/javascript" src="<?=$this->baseUrl; ?>/js/jquery/upload/jquery.MultiFile.pack.js"></script>
+</head>
+<body>
+	<div class="unit horizontal-center layout">
+		<div class="container" style="padding-top:15px;">
+		<img src="<?=$this->cdn('images'); ?>/holid.jpg" alt="mnutopshadow" />
+		<div style="font-size:10px;padding-top:2px;border-bottom:1px solid #ddd;">Buat Akun HukumonlineID</div>
+		<div style="float:right;font-size:12px;">
+			<a href="<?=$this->getKutuRootUrl();?>">Awal</a> | <a href="<?=$this->baseUrl;?>/identity/daftar">Daftar</a>
+		</div>
+		<div style="clear:both;"></div>
+		<div style="padding-top:20px;"></div>
+		<?=$this->layout()->content;?>
+		</div>
+	</div>
+	<div class="unit">
+		<div class="container footer">
+		<a href="<?=$this->baseUrl;?>/identity/feedback">Feedback</a> | Copyright &copy; 2008 Hukumonline		
+		</div>
+	</div>
+</body>
+</html>

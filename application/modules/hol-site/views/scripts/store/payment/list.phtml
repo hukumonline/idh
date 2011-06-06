@@ -1,0 +1,43 @@
+<fieldset>
+	<legend>ORDER HISTORY</legend>
+<table class="display stylized" id="orderhistory">
+<thead>
+    <tr>
+        <th>No</th>
+        <th>Order ID</th>
+        <th>Invoice</th>
+        <th>Payment Method</th>
+        <th>Purchasing Date</th>
+        <th>Order Status</th>
+        <th>Total Price</th>
+        <th>Qty</th>
+        <th class="ta-center">Action</th>
+    </tr>
+</thead>
+<tbody>
+    <?
+    $i=1;
+    foreach ($this->listOrder as $row):
+    ?>
+    <tr class="<?=($i%2 ? 'gradeX' : 'gradeC');?>" id="row_<?=$row['orderId'];?>">
+        <td><?=$i?></td>
+        <td class="center"><?=$row['orderId'];?></td>
+        <td><?=$row['invoiceNumber'];?></td>
+        <td class="ta-center"><?=$row['paymentMethod'];?></td>
+        <td class="center"><?=strftime("%d-%m-%Y", strtotime($row['datePurchased']));?></td>
+        <td><?=$row['ordersStatus'];?></td>
+        <td><?= number_format($row['orderTotal'],0,',','.');?></td>
+        <td><?=$row['countTotal'];?></td>
+        <td>
+            <? if($row['orderStatus'] == 1){ ?>
+            <form method="get" action="<?=KUTU_ROOT_URL;?>/store/viewinvoice">
+                <input type="hidden" name="orderId" value="<?=$row->orderId;?>">
+                <input type="submit" class="form-button" value="Bayar">
+            </form>
+            <? } ?>
+        </td>
+    </tr>
+    <? $i++; endforeach; ?>
+</tbody>
+</table>
+</fieldset>

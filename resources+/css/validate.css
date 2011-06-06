@@ -1,0 +1,33 @@
+.messagebox { position:absolute; width:100px; margin-left:30px; border:1px solid #c93; background:#ffc; padding:3px; }
+.messageboxok { position:absolute; width:auto; margin-left:30px; border:1px solid #349534; background:#C9FFCA; padding:3px; font-weight:bold; color:#008000; }
+.messageboxerror { position:absolute; width:auto; margin-left:30px; border:1px solid #CC0000; background:#F7CBCA; padding:3px; font-weight:bold; color:#CC0000; }
+form.rfgform label.error, label.error {
+	display: none;
+	color: red;
+}
+div.error { display: none; }
+input.error { border: 1px dotted red; }
+#registration_form label.error { margin-left: 20px; width: auto; display: inline; }
+.password { 
+	font-size : 12px; width : 200px; font-family : arial, sans-serif;
+}
+.pstrength-minchar {
+	font-size : 10px; color: #777;
+}		
+div.requiredNotice {
+	width: 140px; float: right; padding: 0;
+}
+div.cc {
+	background-color: #eee;
+	border: 1px solid red;
+}
+div.cc ol li {
+	list-style:none;
+	margin-left: 20px;
+	margin-bottom:5px;
+}
+div.cc { display: none; }
+.cc label.error {
+	display: inline;
+}
+#wait{ font-size: 0.885em;position:absolute; top:0px; right:0px; background:#FF0000; color:#fff; padding:10px; }

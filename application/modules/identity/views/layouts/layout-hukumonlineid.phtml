@@ -1,0 +1,86 @@
+<html>
+<title>Hukumonline-ID</title>
+<head>
+
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />	
+	
+	<style type="text/css">
+		form.rfgform label.error, label.error {
+			/* remove the next line when you have trouble in IE6 with labels in list */
+			display: none;
+			color: red;
+		}
+		div.error { display: none; }
+		input.error { border: 1px dotted red; }
+		#registration_form label.error { margin-left: 20px; width: auto; display: inline; }
+		.password { 
+			font-size : 12px; width : 200px; font-family : arial, sans-serif;
+		}
+		.pstrength-minchar {
+			font-size : 10px; color: #777;
+		}		
+		div.requiredNotice {
+			width: 140px; float: right; padding: 0;
+		}
+	</style>
+	
+	<LINK rel="shortcut icon" href="<?php echo $this->getKutuRootUrl(); ?>/view-resources/ico/hole_small.ico">
+	
+	<!-- Framework CSS -->
+	<link rel="stylesheet" href="<?php echo $this->getKutuRootUrl(); ?>/view-resources/css/bp/screen.css" type="text/css" media="screen, projection">
+	<link rel="stylesheet" href="<?php echo $this->getKutuRootUrl(); ?>/view-resources/css/bp/print.ss" type="text/css" media="print">
+	<!--[if lt IE 8]><link rel="stylesheet" href="<?php echo $this->getKutuRootUrl(); ?>/view-resources/css/bp/ie.css" type="text/css" media="screen, projection"><![endif]-->
+	
+	<link rel="stylesheet" href="<?php echo $this->getKutuRootUrl(); ?>/view-resources/css/hol.css" type="text/css">
+	<link rel="stylesheet" href="<?php echo $this->getKutuRootUrl(); ?>/view-resources/css/validate.css" type="text/css">
+	
+	<script type="text/javascript" src="<?php echo $this->getKutuRootUrl();?>/js/highslide/highslide.js"></script>
+	<script type="text/javascript" src="<?php echo $this->getKutuRootUrl();?>/js/highslide/highslide-html.js"></script>
+	
+	<link href="<?php echo $this->getKutuRootUrl();?>/js/highslide/css/highslide.css" type="text/css" rel="stylesheet" />
+    
+	<script type="text/javascript">    
+	    hs.graphicsDir = '<?php echo $this->getKutuRootUrl(); ?>/js/highslide/graphics/';
+	    hs.outlineWhileAnimating = true;
+	    hs.objectLoadTime = 'after';
+	</script>
+	
+	<script type="text/javascript" src="<?php echo $this->getKutuRootUrl(); ?>/js/jquery/jquery-1.2.3.pack.js"></script>
+	<!-- form -->
+	<script type="text/javascript" src="<?php echo $this->getKutuRootUrl(); ?>/js/jquery/form/jquery.form.js"></script>
+	<script type="text/javascript" src="<?php echo $this->getKutuRootUrl(); ?>/js/jquery/form/jquery.delegate.js"></script>
+	<script type="text/javascript" src="<?php echo $this->getKutuRootUrl(); ?>/js/jquery/form/jquery.validate.js"></script>
+	<script type="text/javascript" src="<?php echo $this->getKutuRootUrl(); ?>/js/jquery/form/jquery.highlightFade.js"></script>
+	<script type="text/javascript" src="<?php echo $this->getKutuRootUrl(); ?>/js/jquery/form/jquery.pstrength.js"></script>
+	<script type="text/javascript" src="<?php echo $this->getKutuRootUrl(); ?>/js/jquery/upload/jquery.MultiFile.pack.js"></script>
+	<script type="text/javascript" src="<?php echo $this->getKutuRootUrl(); ?>/js/jquery/block/jquery.blockUI.js"></script>
+	
+</head>
+<body>
+<div class="container">
+	<div class="span-24 last">
+	<img src="<?=$this->cdn('images'); ?>/holid.jpg" alt="mnutopshadow" />
+	</div>
+	<div class="span-24 last">Buat Akun HukumonlineID</div><hr>
+	<div class="span-24 last"><a href="<?php echo $this->getKutuRootUrl(); ?>">Awal</a> | <a href="<?php echo $this->getKutuRootUrl(); ?>/identity/daftar">Daftar</a></div>
+	<?php echo $this->layout()->content; ?>
+	<hr><div class="span-24 last">
+	<a href="<?php echo $this->getKutuRootUrl();?>/identity/feedback">Feedback</a> | <a href="http://hukumonline.blogspot.com/">Blog</a> | Copyright &copy; 2008 Hukumonline
+	</div>
+</div>
+</body>
+</html>
+
+<div style="display:none;">
+<div class="highslide-html-content" id="highslide-html" style="width: 698px">
+	<div class="highslide-body"></div>
+	
+	<div class="highslide-move" style="border: 0; height: 18px; padding: 2px; cursor: default">
+	    <a href="#" onclick="return hs.close(this)" class="control">Close</a>
+	</div>
+</div></div>
+	
+<script language="javascript">
+	function tutup(obj) {return hs.close(obj)}
+</script>
+

@@ -1,0 +1,30 @@
+<? if (in_array($this->getGroupName($this->packageId), array('corporate', 'executive', 'free', 'individual', 'premium', 'professional', 'ilb', 'ild'))) { ?>
+<fieldset>
+<legend>PERBAHARUI KEANGGOTAAN</legend>
+<table class="display stylized" id="upgrade">
+<thead>
+	<tr>
+		<th>Paket</th>
+		<th colspan="2">Harga (IDR)</th>
+	</tr>
+</thead>
+<tbody>
+	<?
+	$modelPackage = new Kutu_Core_Orm_Table_Package();
+	$rowPackage = $modelPackage->fetchAll(null,"charge ASC");
+	foreach ($rowPackage as $row) :
+	if ($row->packageId == $this->packageId) continue;
+	?>
+	<tr>
+		<td><?=strtoupper($this->getGroupName($row->packageId));?></td>
+		<td align="right" width="10%"><?=number_format($row->charge,2);?></td>
+		<td align="right"><a href="<?=KUTU_ROOT_URL;?>/identity/upgradesub/packageId/<?=$row->packageId;?>">Perbaharui</a></td>
+	</tr>
+	<? endforeach; ?>
+</tbody>
+</table>
+</fieldset>
+<? } else { ?>
+<h4>ANDA SEKARANG BERADA DALAM KEANGGOTAAN NETRAL</h4>
+<p>Tidak perlu melakukan upgrade atau downgrade</p>
+<? } ?>

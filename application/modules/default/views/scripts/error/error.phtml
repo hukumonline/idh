@@ -1,0 +1,20 @@
+<?php
+/**
+ * @package holemp
+ * @copyright 2009-2010 www.hukumonline.com
+ * @author Nihki Prihadi <nihki@hukumonline.com>
+ *
+ * $error: error.phtml 2009-07-11 11:03
+ */
+?>
+
+<div class="container">
+<div class="unit horizontal-center layout">
+	<h1>Error Management</h1>
+	<strong>code: </strong><?php echo $this->error->code; ?><br />
+	<strong>file: </strong><?php echo $this->error->file; ?><br />
+	<strong>line: </strong><?php echo $this->error->line; ?><br />
+	<strong>message: </strong><?php echo $this->error->message; ?><br />
+	<strong>type: </strong><?php echo $this->error->type; ?><br />
+</div>
+</div>

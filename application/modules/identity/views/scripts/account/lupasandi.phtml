@@ -1,0 +1,41 @@
+<div class="unit horizontal-center layout on-2 columns" style="padding-top:20px;">
+<div class="fixed column" style="width:670px;padding-right:20px;">
+<form id="recoveraccount" method="post" action="<?=$this->baseUrl; ?>/identity/lupasandi/kirimsandi">
+<fieldset>
+	<legend>BANTUAN HUKUMONLINE</legend>
+	<p>Masukkan di bawah ini akun anda untuk dikirimkan melalui alamat surat, perihal sandi anda yang baru.</p><br>
+	<dl>
+		<dt><label for="user_name">Nama Pengguna</label></dt>
+		<dd><input name="user_name" id="user_name" type="text"></dd>
+	</dl>
+	<dl>
+		<dt><label for="email">Alamat Surat</label></dt>
+		<dd><input name="email" id="email" type="text"></dd>
+	</dl>
+	<dl>
+		<dd><input value="Kirim sandi" type="submit" id="submit" class="btn" /></dd>
+	</dl>
+</fieldset>
+</form>
+<script type="text/javascript">
+	$(document).ready(function() {
+
+		$('#recoveraccount').submit(function() {
+			$.ajax({
+				type: 'POST',
+				url: $(this).attr('action'),
+				data: $(this).serialize(),
+				success: function(data) {
+					$('#result').show('slow').html(data);
+				}
+			})
+			return false;
+		});
+		
+	});
+</script>
+</div>
+<div class="fixed column" style="width:300px;">
+<div id="result" style="display:none;"></div>
+</div>
+</div>

@@ -1,0 +1,119 @@
+<div id="judul"><a href="<?=KUTU_ROOT_URL;?>"><img src="<?=$this->cdn('images');?>/holid.jpg" alt="hukumonline" /></a></div>
+<div class="align-left">
+<small>Buat Akun HukumonlineID</small>
+</div>
+<div class="align-right">
+    <a href="http://www.hukumonline.com">hukumonline.com</a> | <a href="http://en.hukumonline.com">en.hukumonline.com</a> | <a href="http://www.hukumpedia.com">hukumpedia.com</a> | <a href="http://forum.hukumonline.com">forum.hukumonline.com</a>
+</div>
+<div class="clear">&nbsp;</div>
+<hr>
+<section class="column first">
+    <div class="colgroup leading">
+        <div class="column width6 first">
+            <p><?=$this->content ?></p>
+        </div>
+        <div class="column width2" style="padding-top:10px">
+
+            <? if (isset($this->message)): ?>
+            <div class="box box-info">
+                <?= $this->message; ?>
+            </div>
+            <? endif; ?>
+
+            <div class="corner-tl corner-tr corner-bl corner-br" style="border:1px solid #cecece;">
+                <div class="ta-center" style="padding-top:5px">
+                    <img src="<?=$this->cdn('images'); ?>/holid2.jpg" height="25" border="0" align="middle"> Buat Akun
+                </div>
+                <br/>
+                <!-- our error cc -->
+                <div class="cc">
+                <ol>
+                    <li></li>
+                </ol>
+                </div>
+                <form id="registerForm" method="post" action="">
+                    <div style="padding-left:5px">
+                    <dl>
+                        <dt><label class="required" for="fullname">Nama Lengkap:</label></dt>
+                        <dd><input name="fullname" id="fullname" tabindex="1" type="text" style="width:202px;"></dd>
+                    </dl>
+                    <dl>
+                        <dt><label class="required" for="email">Email:</label></dt>
+                        <dd><input name="email" id="email" tabindex="1" type="text" style="width:202px;"></dd>
+                    </dl>
+                    <dl>
+                        <dt><label class="required" for="identity">Pengguna:</label></dt>
+                        <dd><input name="username" id="username" tabindex="1" type="text" style="width:202px;"></dd>
+                    </dl>
+                    <dl>
+                        <dt><label class="required" for="password">Sandi:</label></dt>
+                        <dd><input id="password" name="password" tabindex="2" type="password" style="width:202px;"></dd>
+                    </dl>
+                        <dl>
+                            <dt>
+                                <input type="hidden" name="aro_groups" value="20" />
+                                <input tabindex="4" value="Daftar" type="submit" id="submit" class="btn" />
+                            </dt>
+                        </dl>
+                    </div>
+                </form>
+                <div class="ta-left" style="padding: 5px;">
+                    Jika Anda sudah punya Akun Hukumonline, silakan <a href="<?=KUTU_ROOT_URL;?>" title="Login">Login</a>
+                    <ul>
+                        <li><a href="<?=$this->baseUrl();?>/identity/daftar/aturan.pakai" title="Term And Condition">Baca aturan pakai</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div style="padding-top:5px"></div>
+            <div class="corner-tl corner-tr corner-bl corner-br" style="border:1px solid #cecece;">
+                <div class="ta-left" style="padding:10px;">
+                    <abbr>Satu Hukumonline!ID</abbr>
+                    Gunakan ID anda untuk Hukumonline Indonesia, Hukumonline English, Hukumpedia dan Forum.
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<script type="text/javascript">
+    $(document).ready(function(){
+        var cc = $('div.cc');
+        $("#registerForm").validate({
+            errorContainer: cc,
+            errorLabelContainer: $("ol", cc),
+            wrapper: 'li',
+            meta: "validate",
+            rules:{
+            	fullname:{
+            		required: true
+            	}
+                ,email:{
+                   required: true,
+                   email: true
+                }
+                ,username:{
+                   required: true,
+                   minlength: 6,
+                   remote: "<?=$this->baseUrl(); ?>/identity/daftar/checkusername/checkusername"
+                }
+                ,password:"required"
+            }
+            ,messages:{
+		fullname: {
+                    required: "Fullname required"
+		},
+		email: {
+                    required: "Email required"
+		},
+		username: {
+                    required: "Username required",
+                    remote: jQuery.format("{0} is already in use")
+		},
+		password: {
+                    required: "Password required"
+		}
+
+            }
+        });
+    }
+);
+</script>

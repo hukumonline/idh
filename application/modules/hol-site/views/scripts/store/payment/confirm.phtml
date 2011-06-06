@@ -1,0 +1,151 @@
+<script>
+    function showResults() {
+         var resultMsg1=0
+         var resultMsg2=0
+         var invdiv ='';
+         <?
+         foreach($this->rowset as $value){
+            $arr1[] = $value['orderTotal'];
+            $arr2[] = $value['currencyValue'];
+            $inv[]  = $value['orderId'].'/'.$value['orderTotal'].'/'.$value['countTotal'];
+         }
+         ?>
+        <? 
+            for($i=0;$i<count($arr1);$i++){
+        ?>
+                if(!document.payconfirm.orderId[<?=$i;?>])
+                {
+                    if(document.payconfirm.orderId.checked){
+                        resultMsg1+=parseFloat(<?=($arr1[$i]);?>)
+                        resultMsg2+=parseFloat(<?=($arr2[$i]*$arr1[$i]);?>)
+                        invdiv+="<?=$inv[$i];?>\n"
+                    }
+                }
+                else
+                {
+                    if(document.payconfirm.orderId[<?=$i;?>].checked){
+                         resultMsg1+=parseFloat(<?=($arr1[$i]);?>)
+                         resultMsg2+=parseFloat(<?=($arr2[$i]*$arr1[$i]);?>)
+                         invdiv+="<?=$inv[$i];?>\n"
+                     }
+                }
+            <?}?>
+         //document.getElementById('amountid').innerHTML=resultMsg2
+         //document.getElementById('amountus').innerHTML=resultMsg1
+         document.getElementById('amount').value=resultMsg1
+         document.getElementById('invoicex').innerHTML=invdiv
+    }
+
+</script>
+<fieldset>
+<legend>CONFIRM TRANSACTION</legend>
+<p>
+    <b><?=$this->numCount;?> data(s) of unconfirmed payment.</b>
+</p>
+<br/>
+<?if(!empty($this->sended)):?>
+<div class="box box-info">
+    <?=$this->sended?>
+</div>
+<?endif;?>
+<form name="payconfirm" id="payconfirm" method="post" action="payconfirm">
+<table class="display stylized" id="confirm">
+<thead>
+    <tr>
+        <th>No</th>
+        <th>Order ID</th>
+        <th>Invoice</th>
+        <th>Payment Method</th>
+        <th>Purchasing Date</th>
+        <th>Order Status</th>
+        <th>Total Price</th>
+        <th>Qty</th>
+        <th class="ta-center">Action</th>
+    </tr>
+</thead>
+<tbody>
+    <?
+    $i=1;
+    foreach ($this->rowset as $row):
+    ?>
+    <tr class="<?=($i%2 ? 'gradeX' : 'gradeC');?>" id="row_<?=$row['orderId'];?>">
+        <td><?=$i?></td>
+        <td class="center"><?=$row['orderId'];?></td>
+        <td><?=$row['invoiceNumber'];?></td>
+        <td class="ta-center"><?=$row['paymentMethod'];?></td>
+        <td class="center"><?=strftime("%d-%m-%Y", strtotime($row['datePurchased']));?></td>
+        <td><?=$row['ordersStatus'];?></td>
+        <td><?=  number_format($row['orderTotal'],0,',','.');?></td>
+        <td><?=$row['countTotal'];?></td>
+        <td>
+            <? if($row['orderStatus'] == 4){ ?>
+            <input type="checkbox" id="orderId" name="orderId[<?=$i?>]" disabled="disabled">
+            <? } else { ?>
+            <input type="checkbox" id="orderId" name="orderId[]" value="<?=$row['orderId']?>" onClick="showResults();">
+            <? } ?>
+        </td>
+    </tr>
+    <? $i++; endforeach; ?>
+</tbody>
+</table>
+    <table class="no-style full">
+        <tr>
+            <td>Order ID/Total/Qty</td>
+            <td><textarea id="invoicex" name="invoicex" onFocus="blur();">&nbsp;</textarea></td>
+        </tr>
+	<tr>
+            <td>Payment Method</td>
+            <td>
+            <select name="paymentMethod">
+                <option value="atm transfer">ATM Transfer
+                <option value="cash bank">Cash Bank
+                <option value="transfer">Transfer
+                <option value="internet banking">Internet Banking
+            </select>
+            </td>
+	</tr>
+	<tr>
+            <td>Bank Account Destination</td>
+            <td>
+	    <select name="destinationAccount">
+	        <? foreach($this->bankAccount as $destAccount){
+	            $acc = explode("|", $destAccount->settingValue);
+	        }
+	        foreach($acc as $accN ){
+	        ?>
+	        <option value="<?=$accN?>"><?=$accN?>
+	        <?}?>
+	    </select>
+            </td>
+	</tr>
+	<tr>
+            <td>Date</td>
+            <td><input type="date" name="paymentDate" id="paymentDate" value="<?=date('Y-m-d')?>"></td>
+	</tr>
+	<tr>
+            <td>Amount</td>
+            <td><input type="text" name="amount" id="amount"></td>
+	</tr>
+	<tr>
+		<td>Sender Account</td>
+		<td><input type="text" name="senderAccount"></td>
+	</tr>
+	<tr>
+            <td>Sender Account Name</td>
+            <td><input type="text" name="senderAccountName"></td>
+	</tr>
+	<tr>
+            <td>Bank Name</td>
+            <td><input type="text" name="bankName"></td>
+	</tr>
+	<tr>
+            <td>Notes</td>
+            <td><textarea name="note"></textarea></td>
+	</tr>
+	<tr>
+            <td>&nbsp;</td>
+            <td><input type="submit" class="btn btn-blue" value="Confirm Payment"/></td>
+	</tr>
+    </table>
+</form>
+</fieldset>

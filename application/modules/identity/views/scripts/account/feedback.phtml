@@ -1,0 +1,43 @@
+<div class="unit horizontal-center layout on-2 columns" style="padding-top:20px;">
+<div class="fixed column" style="width:670px;padding-right:20px;">
+	<form id="givefeedback" method="post" action="<?=$this->baseUrl; ?>/identity/send.feedback" class="niceform">
+	<fieldset>
+		<legend>Kritik dan Saran</legend>
+		<p>Punya kritik dan saran? Ingin bertanya?&nbsp;Jika anda punya kesulitan ketika anda menggunakan layanan dari kami, harap segera hubungi kami.</p><br>
+		<dl>
+			<dt><label for="id_email">Alamat surat</label></dt>
+			<dd><input name="email" id="id_email" class="full" type="text" size="40"></dd>
+		</dl>
+		<dl>
+			<dt><label for="id_feedback">Masukan anda</label></dt>
+			<dd><textarea id="id_feedback" name="feedback" rows="5" cols="60"></textarea></dd>
+		</dl>
+		<dl>
+			<dd><input value="Kirim" type="submit" id="submit" /></dd>
+		</dl>
+	</fieldset>
+	</form>
+	<p>Hubungi kami di <a href="mailto:layanan@hukumonline.com">layanan@hukumonline.com</a>.</p>
+	<script type="text/javascript">
+	$(document).ready(function() {
+
+		$('#givefeedback').submit(function() {
+			$.ajax({
+				type: 'POST',
+				url: $(this).attr('action'),
+				data: $(this).serialize(),
+				success: function(data) {
+					$('#result').show('slow').html(data);
+				}
+			})
+			return false;
+		});
+		
+	});
+	</script>
+</div>
+<div class="fixed column" style="width:300px;">
+<div id="result" style="display:none;"></div>
+</div>
+</div>
+

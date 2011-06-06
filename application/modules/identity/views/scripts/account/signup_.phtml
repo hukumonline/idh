@@ -1,0 +1,545 @@
+<!-- 
+<p>Pilih paket berlangganan:</p>
+<div class="inner"><a href="<?//=$this->baseUrl;?>/identity/daftar/gratis">Paket Gratis</a></div>
+<div class="inner"><a href="<?//=$this->baseUrl;?>/identity/daftar/individual">Paket Individual</a></div>
+<div class="inner"><a href="<?//=$this->baseUrl;?>/identity/daftar/corporate">Paket Corporate</a></div>
+<br><br><br><br><br><p>atau</p><br>
+<div class="inner"><a href="<?//=$this->baseUrl;?>/identity/daftar/penjelasan">Penjelasan</a></div>
+<script type="text/javascript">
+$(document).ready(function() {
+    $('div.inner').wrap('<div class="outer"></div>');
+	$('.inner').corner("round 28px").parent().css('padding', '1px').corner("round 14px");
+
+});
+</script>
+ -->
+ 
+ <!-- our error cc -->
+<div class="cc">
+<ol>
+	<li></li>
+</ol>
+</div>
+<form id="registration_form" name="registration_form" method="post" action="">
+<h2>Informasi yang diperlukan untuk Akun Hukumonlines</h2><br>
+<?php $formater = new Kutu_Lib_Formater(); ?>
+<table>
+<tbody>
+<tr>
+	<td width="25%"><label for="promotionCode">Kode Promosi</label></td>
+	<td><input name="promotionCode" id="promotionCode" value="" type="text" maxlength="25" style="width:250px"></td>
+</tr>
+<tr>
+	<td><label>Pilihan paket</label></td>
+	<td>
+	<select name="paket" id="paket">
+		<option value="25">Gratis</option>
+		<option value="26">Individual</option>
+		<option value="27">Korporasi</option>
+	</select>&nbsp;&gt;&gt;&nbsp;<a href="<?=$this->baseUrl; ?>/identity/daftar/penjelasan" target="_blank">detail</a>
+	</td>
+</tr>
+<tr>
+	<td><label for="fullName" class="input required">Nama Lengkap</label></td>
+	<td><input name="fullName" id="fullName" value="" type="text" style="width:340px"></td>
+</tr>
+<tr>
+	<td><label for="chkGender">Gender</label></td>
+	<td>
+		Pria&nbsp;<input name="chkGender" id="chkGender" value="1" type="radio" checked>
+		Wanita&nbsp;<input name="chkGender" id="chkGender" value="0" type="radio">
+	</td>
+</tr>
+<?php 
+	$lang['months'] = array("Januari","Februari","Maret","April","Mei","Juni","Juli","Agustus","September","Oktober","November","Desember");
+?>
+
+<tr>
+	<td><label for="birthOfDate" class="input required">Tgl. Lahir</label></td>
+	<td><?=$formater->monthPullDown(date("n"),$lang['months']).$formater->dayPullDown(); ?><input name="year" id="year" type="text" maxlength="4" style="width:60px" class="required year"></td>
+</tr>
+<tr>
+	<td><label for="education" class="input required">Pendidikan</label></td>
+	<td><?=$formater->educationPullDown(); ?></td>
+</tr>
+<tr>
+	<td><label for="expense" class="input required">Pengeluaran dalam Sebulan</label></td>
+	<td><?=$formater->expensePullDown() ?></td>
+</tr>
+<tr>
+	<td><label for="company">Nama Perusahaan</label></td>
+	<td><input name="company" id="company" type="text" maxlength="255" style="width:300px"></td>
+</tr>
+<tr>
+	<td><label for="businessType" class="input required">Jenis Usaha</label></td>
+	<td><?=$formater->businessTypePullDown(); ?></td>
+</tr>
+<tr>
+	<td><label for="phone">Telp</label></td>
+	<td><input name="phone" id="phone" type="text" maxlength="30" style="width:250px"></td>
+</tr>
+<tr>
+	<td><label for="fax">Fax</label></td>
+	<td><input name="fax" id="fax" type="text" maxlength="30" style="width:250px" class="fax"></td>
+</tr>
+<tr>
+	<td><label for="payment" class="input required">Periode Pembayaran (bulan)</label></td>
+	<td><input name="payment" id="payment" type="text" size="5" style="width:30px" readonly><br><span class="example">.:Hanya untuk pilihan paket Individual dan Korporasi</span></td>
+</tr>
+</tbody>
+</table>
+
+<h2>1. Ketik Nama Pengguna</h2>
+
+<p>Kamu bisa pilih nama pengguna untuk digunakan di Hukumonline.</p><br>
+
+<table>
+<tbody>
+<tr>
+	<td width="15%"><label for="username1" class="input required">Nama Pengguna</label></td>
+	<td><input name="username1" id="username1" type="text" maxlength="50" style="width:340px">&nbsp;<input name="iscontact" id="iscontact1" type="radio" value="1" checked>Kontak Pengguna<br><span class="example">Contoh:zapatista</span></td>
+</tr>
+<tr>
+	<td>&nbsp;</td>
+	<td><input name="chkavailable1" id="chkavailable1" type="button" value="Cek Nama Penggunaku" onClick='chkavailable(1); return false;'></td>
+</tr>
+<tr class='row1'></tr>
+</tbody>
+</table>
+	
+<h2>2. <span>Ketik Sandi</span></h2>
+
+<p>Nama Sandi ini akan digunakan jika anda ingin mengakses ke Hukumonline.</p><br>
+	
+<table>
+<tbody>
+<tr>
+  	<td width="15%"><label for="password" class="input required">Buat sandi</label></td>
+   	<td><input id="password1" name="password1" type="password" class="password"></td>
+</tr>
+<tr class="form_item" id="password_confirm_row">
+   	<td class="form_title"><label for="password-confirm" class="input required">Masukkan lagi</label></td>
+   	<td><input name="password_confirm" id="password-confirm" type="password"></td>
+</tr>
+</tbody>
+</table>
+	
+<h2>3. Masukkan alamat email kamu</h2>
+
+	<p>Alamat email kamu penting, dengan memberikan alamat email akan dapat membantu kamu<br> jika
+	suatu saat kamu lupa informasi akunmu.</p><br>
+
+<table>
+<tbody>
+<tr>
+	<td width=15%><label for="email" class="input required">E-mail</label></td>
+	<td><input name="email" id="email" type="text" maxlength="50" style="width:250px"><br><span class="example">Contoh:zapatista@hukumonline.com</span></td>
+</tr>
+<tr>
+	<td>&nbsp;</td>
+	<td><input name="chkavailable2" id="chkavailable2" type="button" value="Cek emailku" onClick='chkavailableEmail(); return false;'><span id="msgbox1" style="display:none"></span></td>
+</tr>
+</tbody>
+</table>
+
+<input type="hidden" name="id" id="id" value="1">
+				
+<div id="nameFields"></div><br>
+
+<table>
+<tbody>
+<tr>
+	<td width="5%">Berita</td>
+	<td>
+		<input type="checkbox" name="newArtikel" value="1" checked>&nbsp;Artikel Berita Terbaru<br>
+		<input type="checkbox" name="newWeeklyRegulation" value="1" id="newWeeklyRegulation" disabled>&nbsp;Daftar Peraturan Mingguan<br>
+		<input type="checkbox" name="newRegulation" value="1">&nbsp;Daftar Peraturan Bulanan
+	</td>
+</tr>				
+</tbody>
+</table>
+
+<table>
+<tbody>
+<tr class="radiochecks">
+	<td width="2%" nowrap><input name="agree" id="agree" type="checkbox"></td>
+	<td colspan="2"><label for="agree" class="input required">Saya setuju  dengan aturan pemakaian</label></td>
+</tr>
+<tr>
+	<td>&nbsp;</td>
+	<td><a href="<?=$this->baseUrl; ?>/identity/daftar/aturan.pakai" target="_blank">Baca aturan pakai</a></td>
+</tr>
+<tr>
+	<td>&nbsp;</td>
+	<td></td>
+</tr>
+</tbody>
+</table>
+
+<p class="buttons"><input value="Buat akunku" type="submit"></p>
+
+</form><br>
+
+<div id="addfield">
+<p><a href="javascript:;" onClick="addFormField(); return false;">Tambah data</a></p>
+</div><br>
+
+<script type="text/javascript">
+var cc = $('div.cc');
+$('.password').pstrength();
+$("#registration_form").validate({
+	errorContainer: cc,
+	errorLabelContainer: $("ol", cc),
+	wrapper: 'li',
+	meta: "validate",
+	rules: {
+		fullName: "required",
+		day: "required",
+		year: "required",
+		payment: {
+			digits: true,
+			rangeValue: [1,12]
+		},
+		education: "required",
+		expense: "required",
+		businessType: "required",
+		username1: {
+			required: true,
+			minLength: 2
+			,remote: "<?=$this->baseUrl; ?>/identity/checkusername/id/1"
+		},
+		password1: {
+			required: true,
+			minLength: 8
+		},
+		password_confirm: {
+			required: true,
+			minLength: 8,
+			equalTo: "#password1"
+		},
+		email: {
+			required: true,
+			email: true
+			,remote: "<?=$this->baseUrl; ?>/identity/checkemail"
+		},
+		username2: { 
+			minLength: 2
+			,remote: "<?=$this->baseUrl; ?>/identity/checkusername/id/2" 
+		},
+		password2: { minLength: 8 },
+		confirmpassword2: { minLength: 8, equalTo: "#password2" },		
+		username3: { 
+			minLength: 2
+			,remote: "<?=$this->baseUrl; ?>/identity/checkusername/id/3" 
+		},
+		password3: { minLength: 8 },
+		confirmpassword3: { minLength: 8, equalTo: "#password3" },		
+		username4: { 
+			minLength: 2
+			,remote: "<?=$this->baseUrl; ?>/identity/checkusername/id/4" 
+		},
+		password4: { minLength: 8 },
+		confirmpassword4: { minLength: 8, equalTo: "#password4" },		
+		username5: { 
+			minLength: 2
+			,remote: "<?=$this->baseUrl; ?>/identity/checkusername/id/5" 
+		},
+		password5: { minLength: 8 },
+		confirmpassword5: { minLength: 8, equalTo: "#password5" },		
+		username6: { 
+			minLength: 2 
+			,remote: "<?=$this->baseUrl; ?>/identity/checkusername/id/6"
+		},
+		password6: { minLength: 8 },
+		confirmpassword6: { minLength: 8, equalTo: "#password6" },		
+		username7: { 
+			minLength: 2
+			,remote: "<?=$this->baseUrl; ?>/identity/checkusername/id/7" 
+		},
+		password7: { minLength: 8 },
+		confirmpassword7: { minLength: 8, equalTo: "#password7" },
+		username8: { 
+			minLength: 2
+			,remote: "<?=$this->baseUrl; ?>/identity/checkusername/id/8" 
+		},
+		password8: { minLength: 8 },
+		confirmpassword8: { minLength: 8, equalTo: "#password8" },
+		username9: { 
+			minLength: 2
+			,remote: "<?=$this->baseUrl; ?>/identity/checkusername/id/9" 
+		},
+		password9: { minLength: 8 },
+		confirmpassword9: { minLength: 8, equalTo: "#password9" },
+		username10: { 
+			minLength: 2
+			,remote: "<?=$this->baseUrl; ?>/identity/checkusername/id/10" 
+		},
+		password10: { minLength: 8 },
+		confirmpassword10: { minLength: 8, equalTo: "#password10" },
+		agree: "required"
+	},
+	messages: {
+		fullName: "Nama lengkap diisi",
+		day: "Tgl. lahir diisi",
+		year: "Tahun lahir diisi",
+		payment: {
+			digits: "Harap hanya angka yang diketikkan",
+			rangeValue: "Masukkan nilai antara {0} dan {1}."
+		},
+		expense: "Pilih pengeluaran mu dalam sebulan",
+		education: "Pilih pendidikan",
+		businessType: "Pilih jenis usaha",
+		username1: {
+			required: "Nama pengguna diwajibkan",
+			minLength: "Nama pengguna paling sedikit 2 karakter",
+			remote: jQuery.format("username1 {0} is already in use")
+		},
+		password1: {
+			required: "Masukkan kata sandi",
+			minLength: "Kata sandi panjangnya paling sedikit 8 karakter"
+		},
+		password_confirm: {
+			required: "Harap isi konfirmasi kata sandi",
+			minLength: "Kata sandi panjangnya paling sedikit 8 karakter",
+			equalTo: "Masukkan kata sandi sama dengan yang diatas"
+		},
+		email: {
+			required: "Masukkan email kamu",
+			remote: jQuery.format("{0} is already in use")
+		},
+		username2: {
+			minLength: "Nama pengguna paling sedikit 2 karakter",
+			remote: jQuery.format("username2 {0} is already in use")
+		},
+		password2: {
+			minLength: "Kata sandi panjangnya paling sedikit 8 karakter"
+		},
+		confirmpassword2: {
+			minLength: "Kata sandi panjangnya paling sedikit 8 karakter",
+			equalTo: "Masukkan kata sandi sama dengan yang diatas"
+		},		
+		username3: {
+			minLength: "Nama pengguna paling sedikit 2 karakter",
+			remote: jQuery.format("username3 {0} is already in use")
+		},
+		password3: {
+			minLength: "Kata sandi panjangnya paling sedikit 8 karakter"
+		},
+		confirmpassword3: {
+			minLength: "Kata sandi panjangnya paling sedikit 8 karakter",
+			equalTo: "Masukkan kata sandi sama dengan yang diatas"
+		},		
+		username4: {
+			minLength: "Nama pengguna paling sedikit 2 karakter",
+			remote: jQuery.format("username4 {0} is already in use")
+		},
+		password4: {
+			minLength: "Kata sandi panjangnya paling sedikit 8 karakter"
+		},
+		confirmpassword4: {
+			minLength: "Kata sandi panjangnya paling sedikit 8 karakter",
+			equalTo: "Masukkan kata sandi sama dengan yang diatas"
+		},		
+		username5: {
+			minLength: "Nama pengguna paling sedikit 2 karakter",
+			remote: jQuery.format("username5 {0} is already in use")
+		},
+		password5: {
+			minLength: "Kata sandi panjangnya paling sedikit 8 karakter"
+		},
+		confirmpassword5: {
+			minLength: "Kata sandi panjangnya paling sedikit 8 karakter",
+			equalTo: "Masukkan kata sandi sama dengan yang diatas"
+		},		
+		username6: {
+			minLength: "Nama pengguna paling sedikit 2 karakter",
+			remote: jQuery.format("username6 {0} is already in use")
+		},
+		password6: {
+			minLength: "Kata sandi panjangnya paling sedikit 8 karakter"
+		},
+		confirmpassword6: {
+			minLength: "Kata sandi panjangnya paling sedikit 8 karakter",
+			equalTo: "Masukkan kata sandi sama dengan yang diatas"
+		},		
+		username7: {
+			minLength: "Nama pengguna paling sedikit 2 karakter",
+			remote: jQuery.format("username7 {0} is already in use")
+		},
+		password7: {
+			minLength: "Kata sandi panjangnya paling sedikit 8 karakter"
+		},
+		confirmpassword7: {
+			minLength: "Kata sandi panjangnya paling sedikit 8 karakter",
+			equalTo: "Masukkan kata sandi sama dengan yang diatas"
+		},
+		username8: {
+			minLength: "Nama pengguna paling sedikit 2 karakter",
+			remote: jQuery.format("username8 {0} is already in use")
+		},
+		password8: {
+			minLength: "Kata sandi panjangnya paling sedikit 8 karakter"
+		},
+		confirmpassword8: {
+			minLength: "Kata sandi panjangnya paling sedikit 8 karakter",
+			equalTo: "Masukkan kata sandi sama dengan yang diatas"
+		},
+		username9: {
+			minLength: "Nama pengguna paling sedikit 2 karakter",
+			remote: jQuery.format("username9 {0} is already in use")
+		},
+		password9: {
+			minLength: "Kata sandi panjangnya paling sedikit 8 karakter"
+		},
+		confirmpassword9: {
+			minLength: "Kata sandi panjangnya paling sedikit 8 karakter",
+			equalTo: "Masukkan kata sandi sama dengan yang diatas"
+		},
+		username10: {
+			minLength: "Nama pengguna paling sedikit 2 karakter",
+			remote: jQuery.format("username10 {0} is already in use")
+		},
+		password10: {
+			minLength: "Kata sandi panjangnya paling sedikit 8 karakter"
+		},
+		confirmpassword10: {
+			minLength: "Kata sandi panjangnya paling sedikit 8 karakter",
+			equalTo: "Masukkan kata sandi sama dengan yang diatas"
+		},
+		agree: "<< <i>Centang aturan pemakaian</i> >>"
+	}
+});
+
+$('#addfield').hide();
+
+$('#paket').click( 
+function() 
+{ 
+    if ($('#paket').val() == 25)
+    {
+    	$('#newWeeklyRegulation').attr('disabled',true);
+    	$('#addfield').hide('fast');
+    }
+    else if ($('#paket').val() == 26)
+    {
+    	$('#newWeeklyRegulation').attr('disabled',true);
+    	$('#addfield').hide('fast');
+    	$('#payment').removeAttr('readonly');
+    }
+    else
+    {
+    	$('#newWeeklyRegulation').removeAttr('disabled');
+    	$('#payment').removeAttr('readonly');
+    	$('#addfield').show('slow');
+    }
+});
+
+function addFormField() {
+	
+		var id = document.getElementById("id").value;
+		
+		id = (id - 1) + 2;
+		document.getElementById("id").value = id;
+		if (id > 10) 
+		{
+			alert('maximal user 10');
+			return true;
+		}
+		
+		$("#nameFields").append("<table id='row" + id + "'><tbody><tr><td colspan='2'><hr></td></tr><tr><td><label for='username" + id + "'>Nama Pengguna " + id + "</label></td><td><input type='text' name='username" + id + "' id='username" + id + "' maxlength='50' style='width:260px' /><br><span class=\"example\">Contoh:zapatista</span></td><td nowrap><input type='radio' name='iscontact' id='iscontact" + id + "' value=" + id + ">Kontak Pengguna</td></tr><tr><td>&nbsp;</td><td><input name='chkavailable" + id + "' id='chkavailable" + id + "' type='button' value='Cek Nama Penggunaku' onClick='chkavailable(\"" + id + "\"); return false;'></td></tr><tr class='row" + id + "'></tr><tr><td><label for='password" + id + "'>Buat sandi</label></td><td><input class='Epassword" + id + "' name='password" + id + "' id='password" + id + "' type='password' maxlength='50' style='width:260px'></td></tr><tr><td><label for='konfirm" + id + "'>Masukkan lagi</label></td><td><input name='confirmpassword" + id + "' id='confirmpassword" + id + "' type='password' maxlength='50' style='width:260px'></td></tr><tr><td>&nbsp;&nbsp<a href='#' onClick='removeFormField(\"#row" + id + "\"); return false;'>Remove</a></td></tr><tr class='error" + id + "'></tr><br/><tbody><table>");	
+		
+		$('#row' + id).highlightFade({
+			speed:1000
+		});
+		
+		$('.Epassword' + id).pstrength();
+	
+	
+}
+
+function removeFormField(id) { 
+	$(id).remove();
+}
+
+function chkavailable(id) {
+	var uname = $('#username'+id).attr('value');
+	
+	/* Just to be sure .. remove any changes from previous submit */
+	$('tr.row' + id).empty();												
+	
+	if (uname != "") {
+		$.ajax({
+			type: 'POST',
+			dataType: 'json',
+			url: '<?=$this->baseUrl;?>/identity/get.me.username',
+			data: 'username='+ uname,
+			success: function(json) {
+				if( json.success == "true" ) {
+					
+					var html = '<td colspan="5" style="color: #7ebddd;margin-bottom: 1.5em; padding-left: 10em; background-repeat: no-repeat; background-position: 0 .2em;">' + json.data + '</td>';
+					$('tr.row' + id).prepend(html);						
+					
+				} else {
+					
+					if (json.error == "1") {
+						var html = '<td colspan="5" style="color: #f00;margin-bottom: 1.5em; padding-left: 7em; background-repeat: no-repeat; background-position: 0 .2em;">' + json.err1 + '</td>';
+					} else if (json.error == "2") {
+						var html = '<td colspan="5" style="color: #f00;margin-bottom: 1.5em; padding-left: 7em; background-repeat: no-repeat; background-position: 0 .2em;">' + json.err2 + '</td>';
+					} else if (json.error == "3") {
+						var html = '<td colspan="5" style="color: #f00;margin-bottom: 1.5em; padding-left: 7em; background-repeat: no-repeat; background-position: 0 .2em;">' + json.err3 + '</td>';
+					}
+					
+					$('tr.row' + id).prepend(html);						
+					
+				}
+			},
+			failure: function(json) {
+				
+			}
+		});
+	} 
+}
+function chkavailableEmail() {
+	var email = $('#email').attr('value');
+	
+	if (email != "") {
+		$.ajax({
+			type: 'POST',
+			dataType: 'json',
+			url: '<?=$this->baseUrl;?>/identity/get.me.email',
+			beforeSend: GetprepareData,
+			data: 'email='+ email,
+			success: function(json) {
+				if (json.success == true)
+				{
+				  	$("#msgbox1").fadeTo(200,0.1,function()  //start fading the messagebox
+					{ 
+						$(this).html(json.message).addClass('messageboxok').fadeTo(900,1);
+					});
+				}
+				else
+				{
+				  	$("#msgbox1").fadeTo(200,0.1,function() //start fading the messagebox
+					{ 
+					  	$(this).html(json.message).addClass('messageboxerror').fadeTo(900,1);
+					});		
+				}
+			},
+			failure: function(json) {
+				
+			}
+		});
+	} 
+}
+function GetprepareData()
+{
+   	$("#msgbox1").removeClass().addClass('messagebox').text('Validating ...').fadeIn(1000);
+}
+
+var message = "<?echo $this->message;?>";
+if(message!="")
+{
+	alert (message);
+}
+
+</script>

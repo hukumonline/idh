@@ -1,0 +1,84 @@
+<fieldset>
+<legend>GANTI PAKET: <?=strtoupper($this->getGroupName($this->packageId));?></legend>
+
+<form id="form-muc" method="post" action="<?=KUTU_ROOT_URL?>/membership/payment/complete">
+
+<p>
+    <label class="required" for="fullName">Periode Pembayaran (bulan)</label><br/>
+    <input type="text" id="payment" name="payment" size="2" value="<?=$this->rowUser->paymentId;?>" />
+</p>
+
+
+<h5>INFORMASI TAGIHAN</h5>
+
+<p>
+    <label for="taxnumber">NPWP</label><br/>
+    <input name="taxNumber" class="half" value="<?=$this->userInfo->taxNumber?>">
+</p>
+<p>
+    <label for="company">Perusahaan</label><br/>
+    <input name="taxCompany" class="half" value="<?=$this->userInfo->taxCompany?>">
+</p>
+<p>
+    <label for="address">Alamat</label><br/>
+    <textarea class="small" name="taxAddress"><?=$this->userInfo->taxAddress?></textarea>
+</p>
+<p>
+    <label for="city">Kota</label><br/>
+    <input name="taxCity" class="small" value="<?=$this->userInfo->taxCity?>">
+</p>
+<p>
+    <label for="zip">Kodepos</label><br/>
+    <input name="taxZip" class="small" value="<?=$this->userInfo->taxZip?>">
+</p>
+<? $formater = new Kutu_Lib_Formater(); ?>
+<p>
+    <label for="province">Propinsi</label>
+    <br/>
+    <?=$formater->chooseProvince($this->rowUser->state);?>
+</p>
+<p>
+	<label for="taxCountry">Negara</label><br/>
+	<?=$this->formSelectCountries('taxCountry', ($this->userInfo->taxCountryId)?$this->userInfo->taxCountryId:"ID");?>
+</p>
+
+<br><h5>PILIH METODE PEMBAYARAN</h5>
+
+<p>
+	<label class="required" for="method">Metode Pembayaran</label><br/>
+	<select name='method' id='method' style='width:200px;'>
+		<option value=''>-- Pilih --</option>
+		<option value='manual'>Bank Transfer</option>
+		<option value='nsiapay'>NsiaPay</option>
+	</select>
+</p>
+<input type="hidden" name="kopel" value="<?=$this->rowUser->kopel;?>">
+<input type="hidden" name="packageId" value="<?=$this->packageId;?>">
+<p class="box"><input type="submit" class="btn btn-green big" value="Proces"/></p>
+
+</form>
+</fieldset>
+
+<script type="text/javascript">
+    jQuery(document).ready(function(){
+        
+        var validator = jQuery("#form-muc").validate({
+           rules:{
+               method:"required"
+               ,payment:{
+               		required: true
+                   ,digits:true
+                   ,range:[1,12]
+               }
+           }
+            ,errorPlacement: function(error, element) {
+                error.insertAfter(element.parent().find('label:first'));
+            }
+            ,success: function(label){
+                label.html("&nbsp;").addClass("ok");
+            }
+        });
+    }
+);
+</script>
+

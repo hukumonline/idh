@@ -1,0 +1,36 @@
+<?php $auth = Zend_Auth::getInstance(); ?>
+<?php if (($auth->getIdentity()->isContact == "Y") && (in_array($auth->getIdentity()->packageId,array(26,27)))) { ?>
+	<?php
+	$tblInvoice = new Kutu_Core_Orm_Table_Invoice();
+	$rowInvoice = $tblInvoice->fetchAll("uid='".$auth->getIdentity()->kopel."'");
+	?>
+	<table align="center" style="width:90%" class="clientareatable" cellspacing="1">
+	<tr class="clientareatableheading">
+		<td>Tagihan #</td>
+		<td>Tanggal Penagihan</td>
+		<td>Tanggal Jatuh Tempo</td>
+		<td>Total</td>
+		<td>Status</td>
+		<td></td>
+	</tr>
+	<?php foreach ($rowInvoice as $row) : ?>
+	<tr class="clientareatableactive">
+		<td><?php echo $row->invoiceId; ?></td>
+		<td><?php echo $row->invoiceOutDate; ?></td>
+		<td><?php echo $row->expirationDate; ?></td>
+		<td>Rp. <?php echo $row->price; ?></td>
+		<?php 
+		if ($row->isPaid == "N") { 
+			$isPaid = "<font color='#CC0000'>Belum Lunas</font>";
+		} 
+		else 
+		{
+			$isPaid = "<font color='#779500'>Lunas</font>";
+		}
+		?>
+		<td><?php echo $isPaid; ?></td>
+		<!--<td><a href="javascript:;" target="_blank"><font color="#65A5E6">Lihat Tagihan</font></a></td>-->
+	</tr>
+	<?php endforeach; ?>
+	</table>
+<?php } ?>

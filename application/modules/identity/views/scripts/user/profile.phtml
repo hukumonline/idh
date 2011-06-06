@@ -1,0 +1,93 @@
+<h4>Dasbor</h4>
+<p>Menemukan semua informasi mengenai akun Anda di sini.</p><br/>
+<fieldset>
+<legend>LOGIN NAME:&nbsp;<?=$this->rowset->username;?></legend>
+</fieldset>
+<?
+$arraypictureformat = array("jpg", "jpeg", "gif");
+$txt_allowedformat = implode('; ', $arraypictureformat);
+
+$registry = Zend_Registry::getInstance();
+$config = $registry->get('config');
+$cdn = $config->cdn;
+$sDir = $cdn->static->dir->photo;
+$sDir2 = $cdn->static->url->photo.DIRECTORY_SEPARATOR;
+$x = 0;
+foreach ($arraypictureformat as $key => $val) {
+	if (is_file($sDir."/".$this->rowset->kopel.".".$val)) {
+		$myphoto = $sDir."/".$this->rowset->kopel.".".$val;
+		$myext = $val;
+		$x = 1;
+		break;
+	}
+}
+if ($x == 1) {
+	$myphotosize = getimagesize($myphoto);
+	if (isset($myext) && is_file($sDir."/".$this->rowset->kopel.".".$myext))
+		$txt_existence = "<img src=\"".$sDir2.$this->rowset->kopel.".".$myext."\" width=".$myphotosize[0]." height=".$myphotosize[1]." />";
+
+}
+else
+{
+	$txt_existence = "<img src=\"".$this->cdn."/gravatar-140.png\" border=\"0\" />";
+}
+
+?>
+
+<div style="float:left;padding:5px;">
+<?=$txt_existence;?>
+</div>&nbsp;<a href="<?=KUTU_ROOT_URL;?>/identity/picture">Edit</a>
+<div class="content-box corners">
+<header>
+	<h3><img src="<?=$this->cdn('images');?>/information.png" alt="" />Informasi Pribadi</h3>
+</header>
+<section>
+
+	<p>Kode Pelanggan: <?=$this->rowset->kopel;?></p>
+	<p>Nama: <?=$this->rowset->fullName;?></p>
+	<p>Alamat Surat: <?=$this->rowset->email;?></p>
+	<p>
+	Alamat Rumah: <?=$this->rowset->address;?><br>
+	<?=$this->rowset->city;?><br>
+	<?=$this->rowset->zip;?>
+	</p>
+	<p>Perusahaan: <?=$this->rowset->company;?></p>
+	<p>Telp: <?=$this->rowset->phone;?></p>
+	<p>Fax: <?=$this->fax;?></p>
+
+</section>
+</div>
+<div class="content-box corners">
+<header>
+	<h3><img src="<?=$this->cdn('images');?>/information.png" alt="" />Berita Berkala</h3>
+</header>
+<section>
+	<?php 
+		if ($this->rowset->newArticle == "Y") echo "&raquo;&nbsp;Artikel berita terbaru<br>";
+		if ($this->rowset->weeklyList == "Y") echo "&raquo;&nbsp;Daftar peraturan mingguan<br>";
+		if ($this->rowset->monthlyList == "Y") echo "&raquo;&nbsp;Daftar peraturan bulanan<br>";
+	?>
+</section>
+</div>			
+<br/>
+<p>
+<a href="<?=KUTU_ROOT_URL;?>/identity/editprofile">Edit profile</a>
+</p>				
+
+<script type="text/javascript">
+$(document).ready(function(){
+	// setup content boxes
+    if ($(".content-box").length) {
+        $(".content-box header").css({
+            "cursor": "s-resize"
+        });
+        // Give the header in content-box a different cursor	
+        $(".content-box header").click(
+        function () {
+            $(this).parent().find('section').toggle(); // Toggle the content
+            $(this).parent().toggleClass("content-box-closed"); // Toggle the class "content-box-closed" on the content
+        });
+    }
+
+});
+</script>							

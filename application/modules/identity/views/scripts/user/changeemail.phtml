@@ -1,0 +1,44 @@
+<? if (isset($this->message)): ?>
+<fieldset>
+    <legend>INFORMATION SAVED</legend>
+    <div class="box box-info closeable">
+        <?= $this->message; ?>
+    </div>
+</fieldset>
+<? endif; ?>
+
+<form id="frmEditEmail" name="frmEditEmail" method="post" action="">
+    <fieldset>
+        <legend>UBAH ALAMAT SURAT</legend>
+        <p>
+            <label for="email" class="required">Email Address:</label><br/>
+            <input name="email" id="email" type="text" maxlength="50" value="<?=$this->row->email;?>" style="width:250px"><br><span class="example">Contoh:youremail@hukumonline.com</span>
+        </p>
+    </fieldset>
+    <p>
+        <input class="btn btn-green big" value="Update Email" type="submit" />
+    </p>
+
+    <input type="hidden" name="kopel" id="kopel" value="<?=$this->row->kopel;?>">
+
+    <div class="clear">&nbsp;</div>
+</form>
+<script type="text/javascript">
+$('#frmEditEmail').validate({
+    rules: {
+        email: {
+            required: true,
+            email: true,
+            remote: "<?=$this->baseUrl(); ?>/identity/checkemail"
+        }
+    },
+    messages: {
+    }
+    ,errorPlacement: function(error, element) {
+        error.insertAfter(element.parent().find('label:first'));
+    }
+    ,success: function(label){
+        label.html("&nbsp;").addClass("ok");
+    }
+});
+</script>
