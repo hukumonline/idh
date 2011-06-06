@@ -1,1 +1,10 @@
 application/configs/
+data/
+js+/
+logs/
+resources+/
+uploads+/
+view-resources+/
+.settings/
+.buildpath
+.project
