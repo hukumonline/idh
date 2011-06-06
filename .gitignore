@@ -5,6 +5,9 @@ logs/
 resources+/
 uploads+/
 view-resources+/
+library/Zend_/
+library/adodb/
+library/phpgacl/
 .settings/
 .buildpath
 .project
