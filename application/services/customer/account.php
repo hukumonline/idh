@@ -340,7 +340,7 @@ if (realpath($_SERVER["SCRIPT_FILENAME"]) == realpath(__FILE__) && isset($_GET['
 	
 	require_once "../../../baseinit.php";
 	
-	Glis_Application::getResource('db');
+	//Glis_Application::getResource('db');
 	
     $ctl = new Account();
     $ctl->$_GET['cmd']();
