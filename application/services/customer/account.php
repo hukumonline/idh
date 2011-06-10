@@ -317,7 +317,7 @@ class Account
 		}
 		else if ($groupId == 36) 
 		{
-			$groupName = "Member";
+			$groupName = "Klanten";
 		}
 		else if ($groupId == 34) 
 		{
