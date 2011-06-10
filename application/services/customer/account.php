@@ -121,9 +121,12 @@ class Account
 	{
 		$data = $this->transformMigrationUser($_POST);
 		
+		/*
 		echo '<pre>';
 		print_r($data);
 		echo '</pre>';
+		*
+		*/
 		
 		$modelUser = new Kutu_Core_Orm_Table_User();
 		$rowUser = $modelUser->fetchRow("username='".$_POST['username']."'");
@@ -182,8 +185,8 @@ class Account
 			,'isEmailSentOver'	=> $value['isEmailSentOver']
 			,'createdDate'		=> $value['createdDate']
 			,'createdBy'		=> $value['createdBy']
-			,'modifiedDate'		=> $value['updatedDate']
-			,'modifiedBy'		=> $value['updatedBy']
+			,'modifiedDate'		=> ($value['updatedDate'])? $value['updatedDate'] : ''
+			,'modifiedBy'		=> ($value['updatedBy'])? $value['updatedBy'] : ''
 			,'isActive'			=> $value['isActive']
 			,'isContact'		=> $value['isContact']
 		);
@@ -344,7 +347,7 @@ if (realpath($_SERVER["SCRIPT_FILENAME"]) == realpath(__FILE__) && isset($_GET['
 	require_once "../../../baseinit.php";
 	
 	//Glis_Application::getResource('db');
-	echo 'm';
+	
     $ctl = new Account();
     $ctl->$_GET['cmd']();
 }
