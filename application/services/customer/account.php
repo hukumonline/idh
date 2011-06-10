@@ -120,7 +120,10 @@ class Account
 	function migrationUser()
 	{
 		$data = $this->transformMigrationUser($_POST);
-		//print_r($data);
+		
+		echo '<pre>';
+		print_r($data);
+		echo '</pre>';
 		
 		$modelUser = new Kutu_Core_Orm_Table_User();
 		$rowUser = $modelUser->fetchRow("username='".$_POST['username']."'");
