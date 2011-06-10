@@ -122,7 +122,7 @@ class Account
 		$data = $this->transformMigrationUser($_POST);
 		//print_r($data);
 		
-		$modelUser = new App_Model_Db_Table_User();
+		$modelUser = new Kutu_Core_Orm_Table_User();
 		$rowUser = $modelUser->fetchRow("username='".$_POST['username']."'");
 		if (!$rowUser) $modelUser->insert($data);
 		
@@ -130,7 +130,7 @@ class Account
 		
 		$groupName = $this->getGroupName($_POST['packageId']);
 		
-		$acl = Glis_Acl::manager();
+		$acl = new Kutu_Acl_Adapter_Local();
 		$acl->addUser($_POST['username'],$groupName);
 	}
 	function transformMigrationUser($value)
@@ -146,7 +146,7 @@ class Account
 		
 		$groupName = $this->getGroupName($_POST['packageId']);
 		
-		$acl = Glis_Acl::manager();
+		$acl = new Kutu_Acl_Adapter_Local();
 		$groupId = $acl->getGroupIds($groupName);
 		
 		
@@ -278,8 +278,9 @@ class Account
 	}
 	protected function generateKopel()
 	{
-		$rowset = App_Model_Show_Number::show()->getNumber();
-		$num = $rowset['user'];
+		$modelNumber = new Kutu_Core_Orm_Table_Number();
+        $rowset = $modelNumber->fetchRow();
+        $num = $rowset->user;
 		$totdigit = 5;
 		$num = strval($num);
 		$jumdigit = strlen($num);
@@ -289,7 +290,7 @@ class Account
 	}
 	protected function updateKopel()
 	{
-		$modelNumber = new App_Model_Db_Table_Number();
+		$modelNumber = new Kutu_Core_Orm_Table_Number();
 		$rowset = $modelNumber->fetchRow();
 		$rowset->user = $rowset->user += 1;
 		$rowset->save();
