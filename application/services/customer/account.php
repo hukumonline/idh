@@ -137,7 +137,8 @@ class Account
 		$groupName = $this->getGroupName($_POST['packageId']);
 		
 		$acl = new Kutu_Acl_Adapter_Local();
-		$acl->addUser($_POST['username'],$groupName);
+		//$acl->addUser($_POST['username'],$groupName);
+		$acl->addUserToGroup($_POST['username'],$groupName);
 	}
 	function transformMigrationUser($value)
 	{
@@ -305,7 +306,9 @@ class Account
 	{
 		if ($groupId == 11)
 		{
-			$groupName = "Admin";
+			//$groupName = "Master";
+			//$groupName = "Super Admin";
+			$groupName = "Admin Ina";
 		}
 		else if ($groupId == 41) 
 		{
