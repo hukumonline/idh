@@ -509,7 +509,8 @@ class Identity_AccountController extends Zend_Controller_Action
             $this->updateKopel();
 
             $acl = new Kutu_Acl_Adapter_Local();
-            $acl->addUser($username,"Free");
+            //$acl->addUser($username,"Free");
+            $acl->addUserToGroup($username, "Free");
 
             $formater = new Kutu_Core_Hol_User();
 
