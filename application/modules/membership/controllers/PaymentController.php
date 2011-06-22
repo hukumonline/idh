@@ -260,10 +260,10 @@ class Membership_PaymentController extends Zend_Controller_Action
 //                echo $sha1;die;
                 $paymentObject->addField("WORDS",$sha1);
                 
-                $paymentObject->dumpFields();
+                //$paymentObject->dumpFields();
                 $this->_helper->layout->disableLayout();
                 
-//                $paymentObject->submitPayment();
+                $paymentObject->submitPayment();
                 
 				break;
 			case 'manual':
