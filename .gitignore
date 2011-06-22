@@ -5,6 +5,7 @@ logs/
 resources+/
 uploads+/
 view-resources+/
+library/Kutu/View/Helper/Cdn.php
 library/Zend_/
 library/adodb/
 library/phpgacl/
