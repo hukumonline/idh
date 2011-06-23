@@ -129,7 +129,7 @@ class Account
 		*/
 		
 		$modelUser = new Kutu_Core_Orm_Table_User();
-		$rowUser = $modelUser->fetchRow("username='".$_POST['username']."' AND isActive=1");
+		$rowUser = $modelUser->fetchRow("username='".$_POST['username']."'");
 		if (!$rowUser) 
 		{
 			$modelUser->insert($data);
