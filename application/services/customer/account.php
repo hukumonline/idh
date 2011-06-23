@@ -345,6 +345,10 @@ class Account
 		{
 			$groupName = "Individual";
 		}
+		else if ($groupId == 27) 
+		{
+			$groupName = "Corporate";
+		}
 		
 		return $groupName;
 	}
