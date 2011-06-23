@@ -341,6 +341,10 @@ class Account
 		{
 			$groupName = "Admin En";
 		}
+		else if ($groupId == 26) 
+		{
+			$groupName = "Individual";
+		}
 		
 		return $groupName;
 	}
