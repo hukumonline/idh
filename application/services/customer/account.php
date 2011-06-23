@@ -130,15 +130,18 @@ class Account
 		
 		$modelUser = new Kutu_Core_Orm_Table_User();
 		$rowUser = $modelUser->fetchRow("username='".$_POST['username']."'");
-		if (!$rowUser) $modelUser->insert($data);
+		if (!$rowUser) 
+		{
+			$modelUser->insert($data);
 		
-		$this->updateKopel();
-		
-		$groupName = $this->getGroupName($_POST['packageId']);
-		
-		$acl = new Kutu_Acl_Adapter_Local();
-		//$acl->addUser($_POST['username'],$groupName);
-		$acl->addUserToGroup($_POST['username'],$groupName);
+			$this->updateKopel();
+			
+			$groupName = $this->getGroupName($_POST['packageId']);
+			
+			$acl = new Kutu_Acl_Adapter_Local();
+			//$acl->addUser($_POST['username'],$groupName);
+			$acl->addUserToGroup($_POST['username'],$groupName);
+		}
 	}
 	function transformMigrationUser($value)
 	{
