@@ -27,7 +27,7 @@ class Kutu_Core_Orm_Table_Row_User extends Zend_Db_Table_Row_Abstract
 		}
 		*/
 		
-		$today = date('Y-m-d h:i:s');
+		$today = date('Y-m-d H:i:s');
 		
 		if (empty($this->createdDate)) 	
 			$this->createdDate = $today;	

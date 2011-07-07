@@ -14,6 +14,20 @@ class Kutu_Core_Orm_Table_User extends Kutu_Core_Orm_CoreDb
 	protected $_use_adapter = 'identity';
 	protected $_rowClass = 'Kutu_Core_Orm_Table_Row_User';
 	protected $_dependentTables = array('Kutu_Core_Orm_Table_UserLog','Kutu_Core_Orm_Table_UserDetail');
+
+    public function insert(array $data)
+    {
+    	return parent::insert($data);
+    }
+    public function update(array $data, $where)
+    {
+    	return parent::update($data,$where);
+    }
+    public function delete($where)
+    {
+    	return parent::delete($where);
+    }
+	
 	
     public function getUserCount($guid)
     {
