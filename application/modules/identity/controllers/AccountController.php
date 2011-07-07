@@ -494,12 +494,14 @@ class Identity_AccountController extends Zend_Controller_Action
 
             $obj = new Kutu_Crypt_Password();
             $data = array(
-                'kopel'		=> $kopel
-                ,'username'	=> $username
-                ,'password'	=> $obj->encryptPassword($password)
-                ,'fullName'	=> $fullName
-                ,'email'	=> $email
+                'kopel'			=> $kopel
+                ,'username'		=> $username
+                ,'password'		=> $obj->encryptPassword($password)
+                ,'fullName'		=> $fullName
+                ,'email'		=> $email
                 ,'packageId'	=> $package
+                ,'periodeId'	=> 1
+                ,'createdDate'	=> date('Y-m-d H:i:s')
                 ,'createdBy'	=> $username
             );
 
