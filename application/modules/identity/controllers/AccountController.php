@@ -218,7 +218,15 @@ class Identity_AccountController extends Zend_Controller_Action
 		
 		Kutu_Lib_Formater::updateUserLog();
 		
-		Zend_Auth::getInstance()->clearIdentity();
+		$auth = Zend_Auth::getInstance();
+		$username = $auth->getIdentity()->username;
+		
+		$dbAdapters = Zend_Registry::get ( 'dbAdapters' );
+		$config = ($dbAdapters ['hol']);
+		$sql = "DELETE FROM `session` WHERE sessionData LIKE '%$username%'";
+		$config->query($sql);
+		
+		$auth->clearIdentity();
 		$returnUrl = base64_decode($this->_getParam('returnTo'));
         $this->_redirect($returnUrl); 
 	}
